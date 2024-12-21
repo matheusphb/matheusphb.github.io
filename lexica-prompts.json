@@ -1,0 +1,14 @@
+{
+    "header": {
+        "prompt": "A beautiful, serene beach with soft waves, gentle sunlight, and a clear sky. A peaceful and calming atmosphere.",
+        "size": "1024x512"
+    },
+    "footer": {
+        "prompt": "A tranquil landscape during sunset with vibrant colors, a calm river, and distant mountains in the background.",
+        "size": "1024x512"
+    },
+    "background": {
+        "prompt": "An abstract geometric design with soft pastel colors, smooth gradients, and subtle patterns for a modern and elegant look.",
+        "size": "1024x1024"
+    }
+}
