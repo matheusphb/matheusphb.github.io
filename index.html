@@ -1,50 +1,42 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Primeiro Site</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        header {
-            background-color: #007BFF;
-            color: white;
-            padding: 20px 0;
-        }
-        main {
-            padding: 20px;
-        }
-        footer {
-            background-color: #222;
-            color: white;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-        a {
-            color: #007BFF;
-            text-decoration: none;
-        }
-    </style>
+    <title>Meu Site</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Cabeçalho -->
     <header>
-        <h1>Olá Mundo</h1>
+        <div class="header-content">
+            <img src="images/header-image.jpg" alt="Imagem de Cabeçalho">
+            <h1>Bem-vindo ao Meu Site</h1>
+        </div>
     </header>
+
+    <!-- Seção de Conteúdo -->
     <main>
-        <p>Bem-vindo ao meu site! Este é um exemplo básico de página da web.</p>
-        <p>Visite meu <a href="https://github.com/matheusphb" target="_blank">GitHub</a> para mais projetos.</p>
+        <section class="intro">
+            <h2>Sobre</h2>
+            <p>Este é um site criado para demonstrar o uso do Lexica.art para gerar imagens personalizadas.</p>
+        </section>
+
+        <section class="gallery">
+            <h2>Galeria</h2>
+            <div class="gallery-items">
+                <!-- Galeria de Imagens -->
+                <img src="images/background-image.jpg" alt="Imagem de Fundo">
+            </div>
+        </section>
     </main>
+
+    <!-- Rodapé -->
     <footer>
-        <p>&copy; 2024 MatheusPHB</p>
+        <img src="images/footer-image.jpg" alt="Imagem de Rodapé">
+        <p>&copy; 2024 Meu Site - Todos os direitos reservados.</p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
