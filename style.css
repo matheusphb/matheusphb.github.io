@@ -21,60 +21,58 @@ body {
     font-family: var(--font-family);
     background-color: var(--background-color);
     color: var(--text-color);
+    margin: 0;
+    padding: 0;
 }
 
-/* Cabeçalho */
-header {
-    background-color: var(--theme-color);
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-    height: 100px; /* Altura recomendada */
-}
-
-header img {
+/* Container principal */
+.container {
     width: 100%;
-    height: auto;
-    max-height: 80px; /* Limite para altura da imagem */
-    opacity: 0.7;
-}
-
-/* Seções principais */
-main {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #ffffff;
     padding: 20px;
-}
-
-.intro {
-    margin-bottom: 30px;
-}
-
-.gallery {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.gallery-items img {
-    width: 100%;
-    max-width: 300px;
-    margin: 10px;
     border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabeçalhos */
+h1, h2 {
+    color: var(--text-color);
+    text-align: center;
+}
+
+h3 {
+    color: var(--text-color);
+}
+
+/* Parágrafos */
+p {
+    line-height: 1.6;
 }
 
 /* Rodapé */
-footer {
-    background-color: var(--theme-color);
-    color: #fff;
-    padding: 20px;
+.footer {
     text-align: center;
-    height: 60px; /* Altura recomendada */
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
 }
 
-footer img {
-    width: 100%;
-    height: auto;
-    max-height: 50px; /* Limite para altura da imagem */
-    opacity: 0.7;
+/* Imagens de habilidades */
+.skills img {
+    margin: 5px;
+}
+
+/* Informações de contato */
+.contact-info {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.contact-info a {
+    text-decoration: none;
+    color: #0066cc;
 }
 
 /* Acessibilidade */
@@ -84,12 +82,7 @@ a:focus, a:hover {
 
 /* Responsividade */
 @media (max-width: 768px) {
-    header, footer {
-        height: auto;
+    .container {
         padding: 10px;
-    }
-
-    .gallery-items img {
-        max-width: 100%;
     }
 }
