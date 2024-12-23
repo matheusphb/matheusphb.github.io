@@ -1,5 +1,8 @@
 {
+    // Nome do projeto
     "project_name": "Meu Site",
+
+    // Configurações de tema
     "theme": {
         "color": "#2c3e50", 
         "primary_color": "#3498db",
@@ -8,13 +11,27 @@
         "background_color": "#ffffff", 
         "text_color": "#333333"
     },
+
+    // Configurações de fonte
     "font": {
         "family": "Arial, sans-serif",
         "size": "16px",
-        "line_height": "1.5"
+        "line_height": "1.5",
+        "alternative_families": ["Helvetica, sans-serif", "Verdana, sans-serif"]
     },
+
+    // Estilos de botão
     "button_styles": {
         "border_radius": "4px",
-        "padding": "10px 20px"
+        "padding": "10px 20px",
+        "hover_background_color": "#2980b9",
+        "hover_text_color": "#ffffff"
+    },
+
+    // Configurações de layout
+    "layout": {
+        "max_width": "1200px",
+        "margin": "0 auto",
+        "padding": "20px"
     }
 }
