@@ -1,116 +1,87 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Site</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="description" content="Este é um exemplo de site com uma estrutura completa, criado para demonstrar boas práticas em desenvolvimento web.">
-    <meta property="og:title" content="Meu Site">
-    <meta property="og:description" content="Este é um exemplo de site com uma estrutura completa, criado para demonstrar boas práticas em desenvolvimento web.">
-    <meta property="og:image" content="images/og-image.jpg">
-    <meta property="og:url" content="https://meusite.com">
-    <meta name="twitter:card" content="summary_large_image">
-    <style>
-        :root {
-            --theme-color: #2c3e50;
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --accent-color: #e74c3c;
-            --font-family: 'Arial, sans-serif';
-        }
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="pt">
+ <head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="telephone=no" name="format-detection">
+  <title>Currículo - Matheus Costa de Araujo</title>
+  <style type="text/css">
+    /* Adicione seu estilo CSS personalizado aqui para um design único */
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    h1, h2 {
+      color: #333333;
+      text-align: center;
+    }
+    p {
+      line-height: 1.6;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+    .contact-info {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+  </style>
+ </head>
+ <body class="body" style="width:100%;height:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0">
+  <div class="container">
+    <h1>Matheus Costa de Araujo</h1>
+    <h2>Currículo Online</h2>
+    
+    <p><strong>Objetivo:</strong> Buscar uma posição desafiadora em desenvolvimento de software, onde posso aplicar minhas habilidades e crescer profissionalmente.</p>
+    
+    <h3>Experiência</h3>
+    <p><strong>Desenvolvedor de Software</strong> - Empresa X | Janeiro 2022 - Presente</p>
+    <ul>
+      <li>Desenvolvimento de soluções em Java e Python para integração de sistemas.</li>
+      <li>Manutenção e otimização de bancos de dados MySQL e PostgreSQL.</li>
+      <li>Criação de APIs RESTful para comunicação entre diferentes sistemas.</li>
+    </ul>
 
-        body {
-            margin: 0;
-            font-family: var(--font-family);
-            background-color: var(--theme-color);
-            color: #ffffff;
-        }
+    <h3>Educação</h3>
+    <p><strong>Bacharelado em Ciência da Computação</strong> - Universidade Y | 2018 - 2022</p>
+    <ul>
+      <li>Principais disciplinas: Estruturas de Dados, Algoritmos, Banco de Dados, Inteligência Artificial.</li>
+    </ul>
 
-        header {
-            background-color: var(--primary-color);
-            padding: 20px;
-            text-align: center;
-        }
+    <h3>Habilidades</h3>
+    <ul>
+      <li>Programação: Java, Python, JavaScript, SQL</li>
+      <li>Ferramentas: Git, Docker, Jenkins</li>
+      <li>Banco de Dados: MySQL, PostgreSQL</li>
+      <li>Metodologias Ágeis: Scrum, Kanban</li>
+    </ul>
 
-        header h1 {
-            margin: 0;
-        }
+    <div class="contact-info">
+      <p><strong>Email:</strong> matheus@exemplo.com</p>
+      <p><strong>Telefone:</strong> (11) 98765-4321</p>
+      <p><strong>LinkedIn:</strong> linkedin.com/in/matheuscosta</p>
+    </div>
 
-        .intro {
-            background-color: var(--secondary-color);
-            padding: 20px;
-            border-radius: 5px;
-            margin: 20px;
-        }
-
-        .gallery {
-            padding: 20px;
-        }
-
-        .gallery-items img {
-            max-width: 100%;
-            margin: 10px;
-            border: 2px solid var(--accent-color);
-            border-radius: 5px;
-        }
-
-        footer {
-            background-color: var(--primary-color);
-            text-align: center;
-            padding: 20px;
-        }
-
-        footer a {
-            color: var(--accent-color);
-            margin: 0 10px;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
-    <script src="script.js" defer></script>
-</head>
-<body>
-    <!-- Cabeçalho -->
-    <header>
-        <div class="header-content">
-            <img src="images/header-image.jpg" alt="Imagem representativa do cabeçalho">
-            <h1>Bem-vindo ao Meu Site</h1>
-        </div>
-    </header>
-
-    <!-- Seção de Conteúdo -->
-    <main>
-        <section class="intro">
-            <h2>Sobre nós</h2>
-            <p>Este é um exemplo de site com uma estrutura completa, criado para demonstrar boas práticas em desenvolvimento web.</p>
-        </section>
-
-        <section class="gallery">
-            <h2>Galeria</h2>
-            <div class="gallery-items">
-                <!-- Galeria de Imagens -->
-                <img src="images/background-image.jpg" alt="Imagem de fundo atrativa">
-                <img src="images/gallery-image1.jpg" alt="Imagem da galeria 1">
-                <img src="images/gallery-image2.jpg" alt="Imagem da galeria 2">
-            </div>
-        </section>
-    </main>
-
-    <!-- Rodapé -->
-    <footer>
-        <div class="footer-content">
-            <img src="images/footer-image.jpg" alt="Imagem decorativa do rodapé">
-            <p>&copy; 2024 Meu Site. Todos os direitos reservados.</p>
-            <div class="social-links">
-                <a href="https://facebook.com" target="_blank" aria-label="Facebook">Facebook</a>
-                <a href="https://twitter.com" target="_blank" aria-label="Twitter">Twitter</a>
-                <a href="https://instagram.com" target="_blank" aria-label="Instagram">Instagram</a>
-            </div>
-        </div>
-    </footer>
-</body>
+    <div class="footer">
+      <p>&copy; 2024 Matheus Costa de Araujo | Todos os direitos reservados.</p>
+    </div>
+  </div>
+ </body>
 </html>
