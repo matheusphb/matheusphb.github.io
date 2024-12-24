@@ -4,12 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vídeo Natalino</title>
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            margin-top: 20px;
+            color: #fff;
+        }
+        .video-container {
+            margin: 20px auto;
+            max-width: 600px;
+            border: 3px solid #fff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        video {
+            width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
-<body style="margin: 0; background: #000; color: white; text-align: center;">
-    <h1 style="margin-top: 20px; color: #fff;">Boas Festas!</h1>
-    <video autoplay loop muted style="width: 100%; height: auto;">
-        <source src="https://marketplace.canva.com/EAGY2t37WuQ/2/0/450w/canva-qke4S8UnoY0.mp4" type="video/mp4">
-        Seu navegador não suporta vídeos HTML5.
-    </video>
+<body>
+    <h1>Boas Festas!</h1>
+    <div class="video-container">
+        <video autoplay loop muted>
+            <source src="https://marketplace.canva.com/EAGY2t37WuQ/2/0/450w/canva-qke4S8UnoY0.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos HTML5.
+        </video>
+    </div>
 </body>
 </html>
