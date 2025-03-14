@@ -1,103 +1,151 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currículo - Matheus Costa de Araujo</title>
-    <meta name="description" content="Currículo de Matheus Costa de Araujo, especialista em TI com foco em sistemas ERP e bancos de dados.">
-    <meta name="keywords" content="Currículo, Matheus Costa de Araujo, TI, ERP, Banco de Dados">
-    <link rel="stylesheet" href="static/style.css">
-    <link rel="icon" href="static/favicon.ico" type="image/x-icon">
+    <title>Perfil - Matheus Costa</title>
+    <style>
+        /* Resetando os estilos padrões */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Variáveis CSS */
+        :root {
+            --theme-color: #2c3e50;
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --background-color: #f4f4f4;
+            --text-color: #333;
+            --font-family: 'Arial, sans-serif';
+        }
+
+        /* Estilo geral do corpo */
+        body {
+            font-family: var(--font-family);
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container principal */
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Cabeçalhos */
+        h1, h2 {
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        h3 {
+            color: var(--text-color);
+        }
+
+        /* Foto de perfil */
+        .profile-photo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-photo img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+        }
+
+        /* Parágrafos */
+        p {
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Habilidades */
+        .skills {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .skills img {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+        }
+
+        /* Informações de contato */
+        .contact-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .contact-info a {
+            text-decoration: none;
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        /* Rodapé */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Acessibilidade */
+        a:focus, a:hover {
+            outline: 2px solid var(--accent-color);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Matheus Costa de Araujo</h1>
-        <p class="contact-info"> 
-            <strong>Email:</strong> matheus@exemplo.com | 
-            <strong>Telefone:</strong> +55 86 98149 5642 |
-            <strong>Localização:</strong> Parnaíba, Piauí |
-            <strong><a href="https://www.linkedin.com/in/matheus-costa-05093b254">LinkedIn</a></strong>
-        </p>
-    </header>
 
-    <main class="container">
-        <section>
-            <h2>👋 Sobre mim</h2>
-            <p>
-                Apaixonado por tecnologia, análise de dados e otimização de processos, tenho mais de 8 anos de experiência no setor de TI.
-                Meu foco principal é em sistemas ERP e bancos de dados, onde aplico soluções estratégicas para melhorar a eficiência operacional.
-            </p>
-        </section>
+    <div class="container">
+        <div class="profile-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4D03AQE9S1qQE8TUdA/profile-displayphoto-shrink_200_200/B4DZT7LpwNG8Ag-/0/1739380924044?e=1747267200&amp;v=beta&amp;t=q_WtGB4HrNPJSufqMewYapR2oHAmLpwG3HxM0-fhcwU" alt="Matheus Costa">
+        </div>
 
-        <section>
-            <h2>📜 Informações Profissionais</h2>
-            <p>
-                <strong>Momento profissional:</strong> Atuando e buscando novas oportunidades.<br>
-                <strong>Tipo de Oferta:</strong> CLT, Contrato Internacional<br>
-                <strong>Modalidade:</strong> Remoto<br>
-                <strong>Carreira Alvo:</strong> Data Analyst
-            </p>
-        </section>
+        <h1>Matheus Costa</h1>
+        <p>Desenvolvedor Front-End apaixonado por tecnologia e inovação.</p>
 
-        <section>
-            <h2>💻 Principais Tecnologias</h2>
-            <h3>Banco de Dados</h3>
-            <ul>
-                <li><strong>Domínio Avançado:</strong> SQL, Oracle, MySQL</li>
-                <li><strong>Outros Conhecimentos:</strong> MongoDB, PostgreSQL, SQL Server, NoSQL, PL/SQL</li>
-            </ul>
-            
-            <h3>Linguagens de Programação</h3>
-            <ul>
-                <li>Python, C, Java</li>
-            </ul>
+        <div class="skills">
+            <h2>Habilidades</h2>
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+        </div>
 
-            <h3>Ferramentas de Visualização e Análise</h3>
-            <ul>
-                <li>Grafana, Power BI</li>
-            </ul>
-        </section>
+        <div class="contact-info">
+            <h2>Contato</h2>
+            <p>Email: <a href="mailto:matheus.costa@email.com">matheus.costa@email.com</a></p>
+            <p>LinkedIn: <a href="https://www.linkedin.com/in/matheuscosta" target="_blank">linkedin.com/in/matheuscosta</a></p>
+        </div>
 
-        <section>
-            <h2>🎓 Formação Acadêmica</h2>
-            <p><strong>Bacharelado em Engenharia de Software</strong> - UniCesumar (Junho 2022 - Julho 2026)</p>
-        </section>
+        <div class="footer">
+            <p>&copy; 2025 Matheus Costa. Todos os direitos reservados.</p>
+        </div>
+    </div>
 
-        <section>
-            <h2>💼 Experiência Profissional</h2>
-            <h3>Casa O Toureiro (Agosto 2015 - Presente)</h3>
-            <p><strong>Cargos Ocupados:</strong></p>
-            <ul>
-                <li><strong>Separador de Mercadorias (2015-2016):</strong> Organização e separação de mercadorias com precisão logística.</li>
-                <li><strong>Conferente de Mercadorias (2016-2018):</strong> Verificação e controle de conformidade nas entradas e saídas de produtos.</li>
-                <li><strong>Auxiliar de Depósito (2018-2019):</strong> Apoio operacional em armazenamento e logística interna.</li>
-                <li><strong>Encarregado de Abastecimentos (2019-2021):</strong> Gerenciamento de reabastecimento e controle de estoques.</li>
-                <li><strong>Encarregado da Logística de Devolução (2021-2023):</strong> Coordenação da logística reversa com foco na eficiência de devoluções.</li>
-                <li><strong>Suporte Técnico (2023-Atual):</strong> Especialista em ERP, manutenção de servidores e automação de processos.</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>🚀 Projetos e Contribuições</h2>
-            <ul>
-                <li><strong>Gestão e Configuração de Banco de Dados Oracle:</strong> Configuração e gerenciamento de bancos de dados em ambiente multitenant (CDB e PDB).</li>
-                <li><strong>Relatórios Automatizados para Suporte e Performance:</strong> Desenvolvimento de relatórios detalhados em SQL para vendas, estoque e faturamento.</li>
-                <li><strong>Projeto de Exportação e Importação de Dados:</strong> Gerenciamento de exportação e importação de 7 TB de dados e otimização de 4000 arquivos CSV.</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>🏅 Conquistas</h2>
-            <ul>
-                <li>Aumento da eficiência de suporte em 30% com automação de relatórios.</li>
-                <li>Redução de 25% no tempo de processamento em análises de grandes datasets.</li>
-                <li>Implementação de melhorias que elevaram a confiabilidade do sistema ERP.</li>
-            </ul>
-        </section>
-
-        <footer class="footer">
-            <p>&copy; 2024 Matheus Costa de Araujo | Todos os direitos reservados.</p>
-        </footer>
-    </main>
 </body>
 </html>
