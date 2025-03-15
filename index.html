@@ -27,12 +27,11 @@
             <p>Olá! Sou um desenvolvedor apaixonado por tecnologia, programação e inovação. Trabalho com diversas ferramentas para criar soluções eficientes e escaláveis.</p>
         </section>
 
-       <!-- Tecnologias e Ferramentas -->
-<section class="skills">
-    <h2>🌟 Tecnologias e Ferramentas</h2>
-    <p>Criei um arquivo CSV na pasta <code>style</code> contendo informações sobre as tecnologias e ferramentas que utilizo.</p>
-    <a href="static/style/tecnologias.csv" download class="download-btn">📄 Baixar Tecnologias e Ferramentas</a>
-</section>
+        <!-- Tecnologias e Ferramentas -->
+        <section class="skills">
+            <h2>🌟 Tecnologias e Ferramentas</h2>
+            <div id="icons-container"></div>
+        </section>
 
         <!-- Contato -->
         <section class="contact-info">
@@ -51,5 +50,38 @@
         </div>
     </footer>
 
+    <script>
+        async function fetchCSV() {
+            const response = await fetch('static/style/tecnologias.csv');
+            const data = await response.text();
+            return data;
+        }
+
+        function parseCSV(data) {
+            const lines = data.split('\n');
+            const headers = lines[0].split(',');
+            return lines.slice(1).map(line => {
+                const values = line.split(',');
+                return headers.reduce((obj, header, index) => {
+                    obj[header] = values[index];
+                    return obj;
+                }, {});
+            });
+        }
+
+        async function loadIcons() {
+            const csvData = await fetchCSV();
+            const icons = parseCSV(csvData);
+            const container = document.getElementById('icons-container');
+            icons.forEach(icon => {
+                const img = document.createElement('img');
+                img.src = icon.url;
+                img.alt = icon.name;
+                container.appendChild(img);
+            });
+        }
+
+        loadIcons();
+    </script>
 </body>
 </html>
