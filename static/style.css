@@ -52,6 +52,7 @@ header h1 {
 h1, h2 {
     color: var(--text-color);
     text-align: center;
+    margin-bottom: 10px;
 }
 
 h3 {
@@ -70,13 +71,6 @@ p {
     margin-top: 20px;
     font-size: 14px;
     color: #666;
-}
-
-/* Imagens de habilidades */
-.skills img {
-    width: 50px;
-    height: 50px;
-    margin: 5px;
 }
 
 /* Foto de perfil */
@@ -98,6 +92,25 @@ p {
     transform: scale(1.05);
 }
 
+/* Tecnologias e Ferramentas */
+.skills {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.skills img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.skills img:hover {
+    transform: scale(1.05);
+}
+
 /* Informações de contato */
 .contact-info {
     text-align: center;
@@ -106,7 +119,7 @@ p {
 
 .contact-info a {
     text-decoration: none;
-    color: #0066cc;
+    color: var(--primary-color);
     font-weight: bold;
 }
 
@@ -128,12 +141,16 @@ a:focus, a:hover {
     }
 
     .skills img {
-        width: 40px;
-        height: 40px;
+        width: 90%;
     }
 }
 
 /* Estilização do botão de download */
+.download {
+    text-align: center;
+    margin-top: 20px;
+}
+
 .download-btn {
     display: inline-block;
     background-color: var(--primary-color);
