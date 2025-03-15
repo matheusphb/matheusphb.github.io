@@ -3,182 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil - Matheus Costa</title>
-    <meta name="description" content="Perfil de Matheus Costa, desenvolvedor Front-End apaixonado por tecnologia e inovação.">
-    <meta name="keywords" content="Matheus Costa, Desenvolvedor Front-End, Tecnologia, Inovação, HTML5, CSS3, JavaScript, React">
-    <meta name="author" content="Matheus Costa">
-    <link rel="icon" href="path/to/favicon.ico" type="image/x-icon">
-    <style>
-        /* Resetando os estilos padrões */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Variáveis CSS */
-        :root {
-            --theme-color: #2c3e50;
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --accent-color: #e74c3c;
-            --background-color: #f4f4f4;
-            --text-color: #333;
-            --font-family: 'Arial, sans-serif';
-        }
-
-        /* Estilo geral do corpo */
-        body {
-            font-family: var(--font-family);
-            background-color: var(--background-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Container principal */
-        .container {
-            width: 100%;
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Cabeçalhos */
-        h1, h2 {
-            color: var(--text-color);
-            text-align: center;
-        }
-
-        h3 {
-            color: var(--text-color);
-        }
-
-        /* Foto de perfil */
-        .profile-photo {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .profile-photo img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--primary-color);
-            transition: transform 0.3s ease;
-        }
-
-        .profile-photo img:hover {
-            transform: scale(1.05);
-        }
-
-        /* Parágrafos */
-        p {
-            line-height: 1.6;
-            text-align: center;
-        }
-
-        /* Habilidades */
-        .skills {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .skills img {
-            width: 50px;
-            height: 50px;
-            margin: 5px;
-        }
-
-        /* Informações de contato */
-        .contact-info {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .contact-info a {
-            text-decoration: none;
-            color: #0066cc;
-            font-weight: bold;
-        }
-
-        /* Rodapé */
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #666;
-        }
-
-        /* Acessibilidade */
-        a:focus, a:hover {
-            outline: 2px solid var(--accent-color);
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-                width: 90%;
-            }
-
-            .profile-photo img {
-                width: 150px;
-                height: 150px;
-            }
-
-            .skills img {
-                width: 40px;
-                height: 40px;
-            }
-        }
-    </style>
+    <title>Meu Portfólio</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+    <!-- Cabeçalho -->
     <header>
-        <div class="container">
-            <div class="profile-photo">
-                <img src="static/perfil.jpg" alt="Foto de perfil de Matheus Costa">
-            </div>
-
-            <h1>Matheus Costa</h1>
-            <p>Desenvolvedor Front-End apaixonado por tecnologia e inovação.</p>
-        </div>
+        <h1>🚀 Meu Portfólio</h1>
     </header>
 
-    <main>
-        <div class="container">
-            <div class="skills">
-                <h2>Habilidades</h2>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
-            </div>
-
-            <div class="contact-info">
-                <h2>Contato</h2>
-                <p>Email: <a href="mailto:mateusphb20@gmail.com">mateusphb20@gmail.com</a></p>
-                <p>LinkedIn: <a href="https://www.linkedin.com/in/matheus-costa-05093b254/" target="_blank">https://www.linkedin.com/in/matheus-costa/</a></p>
-                
-                <a href="static/curriculo-matheus.pdf" download class="download-btn">
-                    📄 Baixar Currículo
-                </a>
-            </div>
+    <!-- Container Principal -->
+    <div class="container">
+        
+        <!-- Foto de Perfil -->
+        <div class="profile-photo">
+            <img src="https://via.placeholder.com/200" alt="Minha Foto de Perfil">
         </div>
-    </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer">
-                <p>&copy; 2025 Matheus Costa. Todos os direitos reservados.</p>
-            </div>
+        <!-- Sobre Mim -->
+        <h2>Sobre Mim</h2>
+        <p>Olá! Sou um desenvolvedor apaixonado por tecnologia, programação e inovação. Trabalho com diversas ferramentas para criar soluções eficientes e escaláveis.</p>
+
+        <!-- Tecnologias e Ferramentas -->
+        <h2>🌟 Tecnologias e Ferramentas</h2>
+        <div class="skills">
+            <a href="https://skillicons.dev">
+                <img src="https://skillicons.dev/icons?i=aws,gcp,grafana,mysql,python,git,github,mongodb,c,dotnet,docker,eclipse,js,postgres,ai,java,linux" alt="Tecnologias e Ferramentas">
+            </a>
         </div>
+
+        <!-- Botão de Download -->
+        <div class="download">
+            <a href="#" class="download-btn">📥 Baixar Currículo</a>
+        </div>
+
+        <!-- Informações de Contato -->
+        <div class="contact-info">
+            <h2>📩 Contato</h2>
+            <p>Email: <a href="mailto:seuemail@email.com">seuemail@email.com</a></p>
+            <p>LinkedIn: <a href="https://www.linkedin.com/in/seu-perfil/" target="_blank">/seu-perfil</a></p>
+            <p>GitHub: <a href="https://github.com/seuusuario" target="_blank">/seuusuario</a></p>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <p>© 2025 Meu Nome | Todos os direitos reservados</p>
     </footer>
 
 </body>
