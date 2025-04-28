@@ -5,12 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Portfólio</title>
     <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <!-- Cabeçalho -->
     <header>
-        <h1>🚀 Meu Portfólio</h1>
+        <div class="header-container">
+            <h1>🚀 Meu Portfólio</h1>
+            <nav id="main-nav">
+                <ul class="nav-links">
+                    <li><a href="#sobre" class="nav-link">Sobre</a></li>
+                    <li><a href="#skills" class="nav-link">Habilidades</a></li>
+                    <li><a href="#projetos" class="nav-link">Projetos</a></li>
+                    <li><a href="#experiencia" class="nav-link">Experiência</a></li>
+                    <li><a href="#contato" class="nav-link">Contato</a></li>
+                </ul>
+                <button class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
     </header>
 
     <!-- Container Principal -->
@@ -18,48 +33,165 @@
         
         <!-- Foto de Perfil -->
         <div class="profile-photo">
-            <img src="static/perfil.jpg" alt="Minha Foto de Perfil">
+            <img src="static/perfil.jpg" alt="Minha Foto de Perfil" class="fade-in">
         </div>
 
         <!-- Sobre Mim -->
-        <section class="about-me">
+        <section id="sobre" class="about-me section-animation">
             <h2>Sobre Mim</h2>
             <p>Olá! Sou um desenvolvedor apaixonado por tecnologia, programação e inovação. Trabalho com diversas ferramentas para criar soluções eficientes e escaláveis.</p>
         </section>
 
         <!-- Tecnologias e Ferramentas -->
-        <section class="skills">
+        <section id="skills" class="skills section-animation">
             <h2>🌟 Tecnologias e Ferramentas</h2>
             <div class="icon-container">
-        <img src="https://skillicons.dev/icons?i=aws" alt="AWS" class="icon">
-        <img src="https://skillicons.dev/icons?i=gcp" alt="GCP" class="icon">
-        <img src="https://skillicons.dev/icons?i=grafana" alt="Grafana" class="icon">
-        <img src="https://skillicons.dev/icons?i=mysql" alt="MySQL" class="icon">
-        <img src="https://skillicons.dev/icons?i=python" alt="Python" class="icon">
-        <img src="https://skillicons.dev/icons?i=git" alt="Git" class="icon">
-        <img src="https://skillicons.dev/icons?i=github" alt="GitHub" class="icon">
-        <img src="https://skillicons.dev/icons?i=mongodb" alt="MongoDB" class="icon">
-        <img src="https://skillicons.dev/icons?i=c" alt="C" class="icon">
-        <img src="https://skillicons.dev/icons?i=dotnet" alt=".NET" class="icon">
-        <img src="https://skillicons.dev/icons?i=docker" alt="Docker" class="icon">
-        <img src="https://skillicons.dev/icons?i=eclipse" alt="Eclipse" class="icon">
-        <img src="https://skillicons.dev/icons?i=js" alt="JavaScript" class="icon">
-        <img src="https://skillicons.dev/icons?i=postgres" alt="PostgreSQL" class="icon">
-        <img src="https://skillicons.dev/icons?i=ai" alt="AI" class="icon">
-        <img src="https://skillicons.dev/icons?i=java" alt="Java" class="icon">
-        <img src="https://skillicons.dev/icons?i=linux" alt="Linux" class="icon">
-    </div>
+                <img src="https://skillicons.dev/icons?i=aws" alt="AWS" class="icon skill-icon">
+                <img src="https://skillicons.dev/icons?i=gcp" alt="GCP" class="icon skill-icon">
+                <img src="https://skillicons.dev/icons?i=grafana" alt="Grafana" class="icon skill-icon">
+                <img src="https://skillicons.dev/icons?i=mysql" alt="MySQL" class="icon skill-icon">
+                <img src="https://skillicons.dev/icons?i=python" alt="Python" class="icon skill-icon">
+                <img src="https://skillicons.dev/icons?i=git" alt="Git" class="icon skill-icon">
+                <img src="https://skillicons.dev/icons?i=github" alt="GitHub" class="icon skill-icon">
+                <img src="https://skillicons.dev/icons?i=mongodb" alt="MongoDB" class="icon skill-icon">
+                <img src="https://skillicons.dev/icons?i=c" alt="C" class="icon skill-icon">
+                <img src="https://skillicons.dev/icons?i=dotnet" alt=".NET" class="icon skill-icon">
+                <img src="https://skillicons.dev/icons?i=docker" alt="Docker" class="icon skill-icon">
+                <img src="https://skillicons.dev/icons?i=eclipse" alt="Eclipse" class="icon skill-icon">
+                <img src="https://skillicons.dev/icons?i=js" alt="JavaScript" class="icon skill-icon">
+                <img src="https://skillicons.dev/icons?i=postgres" alt="PostgreSQL" class="icon skill-icon">
+                <img src="https://skillicons.dev/icons?i=ai" alt="AI" class="icon skill-icon">
+                <img src="https://skillicons.dev/icons?i=java" alt="Java" class="icon skill-icon">
+                <img src="https://skillicons.dev/icons?i=linux" alt="Linux" class="icon skill-icon">
+            </div>
+        </section>
+
+        <!-- Projetos -->
+        <section id="projetos" class="projects section-animation">
+            <h2>💼 Meus Projetos</h2>
+            <div class="project-cards">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/300x200" alt="Projeto 1">
+                    </div>
+                    <h3>Sistema de Gestão</h3>
+                    <p>Desenvolvimento de um sistema completo para gestão empresarial com dashboard, relatórios e controle de estoque.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Docker</span>
+                    </div>
+                    <a href="#" class="project-link">Ver Projeto</a>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/300x200" alt="Projeto 2">
+                    </div>
+                    <h3>API RESTful</h3>
+                    <p>API completa com autenticação JWT, documentação Swagger e integração com banco de dados NoSQL.</p>
+                    <div class="project-tags">
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                        <span class="tag">Express</span>
+                    </div>
+                    <a href="#" class="project-link">Ver Projeto</a>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/300x200" alt="Projeto 3">
+                    </div>
+                    <h3>Aplicação Web</h3>
+                    <p>Plataforma responsiva com painel administrativo, análise de dados e integração com APIs externas.</p>
+                    <div class="project-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">AWS</span>
+                        <span class="tag">PostgreSQL</span>
+                    </div>
+                    <a href="#" class="project-link">Ver Projeto</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experiência Profissional -->
+        <section id="experiencia" class="experience section-animation">
+            <h2>👨‍💻 Experiência Profissional</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2023 - Atual</div>
+                    <div class="timeline-content">
+                        <h3>Desenvolvedor Full Stack</h3>
+                        <h4>Empresa ABC</h4>
+                        <p>Desenvolvimento de aplicações web utilizando React, Node.js e MongoDB. Implementação de CI/CD com GitHub Actions e deploy na AWS.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2021 - 2023</div>
+                    <div class="timeline-content">
+                        <h3>Desenvolvedor Back-end</h3>
+                        <h4>Empresa XYZ</h4>
+                        <p>Criação de APIs RESTful, integração com sistemas externos e otimização de consultas SQL para melhor performance.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2019 - 2021</div>
+                    <div class="timeline-content">
+                        <h3>Estagiário de TI</h3>
+                        <h4>Empresa 123</h4>
+                        <p>Suporte técnico, manutenção de servidores Linux e desenvolvimento de scripts para automação de tarefas.</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Contato -->
-        <section class="contact-info">
+        <section id="contato" class="contact-info section-animation">
             <h2>📩 Contato</h2>
-            <p>Email: <a href="mailto:mateusphb20@gmail.com">mateusphb20@gmail.com</a></p>
-            <p>LinkedIn: <a href="https://www.linkedin.com/in/matheus-costa-05093b254/" target="_blank">Matheus Costa</a></p>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>Email: <a href="mailto:mateusphb20@gmail.com">mateusphb20@gmail.com</a></p>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <p>LinkedIn: <a href="https://www.linkedin.com/in/matheus-costa-05093b254/" target="_blank">Matheus Costa</a></p>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <p>GitHub: <a href="https://github.com/matheusphb" target="_blank">matheusphb</a></p>
+                </div>
+            </div>
+            <form id="contact-form" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Nome</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensagem</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Enviar Mensagem</button>
+            </form>
             <a href="static/curriculo-matheus.pdf" download class="download-btn">📄 Baixar Currículo</a>
         </section>
 
     </div>
+
+    <!-- Botão "Voltar ao topo" -->
+    <button id="back-to-top" class="back-to-top" title="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Tema escuro/claro -->
+    <button id="theme-toggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
 
     <!-- Rodapé -->
     <footer>
@@ -68,38 +200,6 @@
         </div>
     </footer>
 
-    <script>
-        async function fetchCSV() {
-            const response = await fetch('static/style/tecnologias.csv');
-            const data = await response.text();
-            return data;
-        }
-
-        function parseCSV(data) {
-            const lines = data.split('\n');
-            const headers = lines[0].split(',');
-            return lines.slice(1).map(line => {
-                const values = line.split(',');
-                return headers.reduce((obj, header, index) => {
-                    obj[header] = values[index];
-                    return obj;
-                }, {});
-            });
-        }
-
-        async function loadIcons() {
-            const csvData = await fetchCSV();
-            const icons = parseCSV(csvData);
-            const container = document.getElementById('icons-container');
-            icons.forEach(icon => {
-                const img = document.createElement('img');
-                img.src = icon.url;
-                img.alt = icon.name;
-                container.appendChild(img);
-            });
-        }
-
-        loadIcons();
-    </script>
+    <script src="static/main.js"></script>
 </body>
 </html>
