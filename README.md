@@ -5,6 +5,7 @@
 [![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-matheusphb.github.io-brightgreen)](https://matheusphb.github.io)
 
 Um currículo interativo desenvolvido com React, TypeScript e Vite, com funcionalidades modernas e layout responsivo.
 
