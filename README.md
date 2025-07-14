@@ -121,4 +121,4 @@ Contribuições são sempre bem-vindas! Sinta-se à vontade para:
 **Matheus Costa de Araújo**
 - Email: mateusphb20@gmail.com
 - GitHub: [@matheusphb](https://github.com/matheusphb)
-- LinkedIn: [Matheus Costa de Araújo](https://linkedin.com/in/matheusphb)
+- LinkedIn: [Matheus Costa de Araújo](https://www.linkedin.com/in/matheus-costa-05093b254/)
