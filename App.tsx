@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CV_DATA } from './constants';
-import { Experience, Education, CertificationGroup } from './types';
+import { Experience } from './types';
 import Pill from './components/Pill';
 import { BriefcaseIcon, AcademicCapIcon, SparklesIcon, UserIcon, EnvelopeIcon, PhoneIcon, MapPinIcon, PrinterIcon, GithubIcon, CpuChipIcon } from './components/Icons';
 import { PROFILE_IMAGE_BASE64 } from './assets';
-
-// Você pode adicionar um arquivo CSS separado para estilos de impressão
-// import './printStyles.css';
+import AdaptResume from './components/AdaptResume';
 
 const Section: React.FC<{ title: string; icon: React.ReactNode; children: React.ReactNode; className?: string }> = ({ title, icon, children, className = '' }) => (
   <section className={`mb-10 print:mb-6 ${className}`}>
@@ -31,9 +29,18 @@ const TimelineItem: React.FC<{ item: Experience; isLast: boolean }> = ({ item, i
 
 const App: React.FC = () => {
   const { name, title, summary, contact, experience, education, certifications, technicalSkills } = CV_DATA;
+  const [activeTab, setActiveTab] = useState<'resume' | 'adapt'>('resume');
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const getTabClass = (tabName: 'resume' | 'adapt') => {
+    const baseClasses = "whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium";
+    if (activeTab === tabName) {
+      return `${baseClasses} border-sky-500 text-sky-600`;
+    }
+    return `${baseClasses} border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700`;
   };
 
   return (
@@ -75,8 +82,8 @@ const App: React.FC = () => {
                 {contact.github && (
                   <li className="flex items-center gap-3">
                     <GithubIcon className="w-5 h-5 text-sky-500 print:w-4 print:h-4" />
-                    <a href={contact.github} target="_blank" rel="noopener noreferrer" className="hover:text-sky-600">
-                      {contact.github.replace('https://github.com/', '@')}
+                    <a href={`https://${contact.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-sky-600">
+                      {contact.github.replace('github.com/', '@')}
                     </a>
                   </li>
                 )}
@@ -118,54 +125,74 @@ const App: React.FC = () => {
           
           {/* Right Column (Main Content) */}
           <div className="lg:col-span-2 print:col-span-2">
-            <Section title="Resumo Profissional" icon={<UserIcon className="w-6 h-6 text-sky-600 print:w-5 print:h-5" />}>
-              <p className="leading-relaxed print:text-sm">{summary}</p>
-            </Section>
-
-            <Section title="Experiência Profissional" icon={<BriefcaseIcon className="w-6 h-6 text-sky-600 print:w-5 print:h-5" />}>
-              <ol className="relative border-s border-gray-200 dark:border-gray-700 ms-3">
-                {experience.map((item, index) => (
-                  <TimelineItem 
-                    key={index} 
-                    item={item} 
-                    isLast={index === experience.length - 1}
-                  />
-                ))}
-              </ol>
-            </Section>
-
-            <Section title="Formação Acadêmica" icon={<AcademicCapIcon className="w-6 h-6 text-sky-600 print:w-5 print:h-5" />}>
-              <div className="space-y-6 print:space-y-4">
-                {education.map((edu, index) => (
-                  <div key={index}>
-                    <h3 className="text-lg font-semibold text-slate-800 print:text-base">{edu.degree}</h3>
-                    <p className="text-sm text-slate-600 print:text-xs">{edu.institution} • {edu.period}</p>
-                    {edu.description && <p className="mt-2 text-slate-700 print:text-sm print:mt-1">{edu.description}</p>}
-                  </div>
-                ))}
+            {/* Tab Navigation */}
+            <div className="mb-8 print:hidden">
+              <div className="border-b border-gray-200">
+                <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+                  <button onClick={() => setActiveTab('resume')} className={getTabClass('resume')}>
+                    Meu Currículo
+                  </button>
+                  <button onClick={() => setActiveTab('adapt')} className={getTabClass('adapt')}>
+                    Adaptar com IA
+                  </button>
+                </nav>
               </div>
-            </Section>
+            </div>
 
-            <Section 
-              title="Certificações" 
-              icon={<SparklesIcon className="w-6 h-6 text-sky-600 print:w-5 print:h-5" />} 
-              className="hidden lg:block print:block"
-            >
-              <div className="space-y-6 print:space-y-3">
-                {certifications.map((group, index) => (
-                  <div key={index} className="mb-4 print:mb-2">
-                    <h4 className="font-semibold text-slate-800 mb-2 print:mb-1">{group.issuer}</h4>
-                    <div className="flex flex-wrap gap-2 print:gap-1">
-                      {group.certs.map((cert, certIndex) => (
-                        <span key={certIndex} className="bg-sky-100 text-sky-800 text-xs font-medium px-2.5 py-1 rounded-md print:px-2 print:py-0.5">
-                          {cert}
-                        </span>
-                      ))}
-                    </div>
+            {/* Tab Content */}
+            {activeTab === 'resume' && (
+              <>
+                <Section title="Resumo Profissional" icon={<UserIcon className="w-6 h-6 text-sky-600 print:w-5 print:h-5" />}>
+                  <p className="leading-relaxed print:text-sm">{summary}</p>
+                </Section>
+
+                <Section title="Experiência Profissional" icon={<BriefcaseIcon className="w-6 h-6 text-sky-600 print:w-5 print:h-5" />}>
+                  <ol className="relative border-s border-gray-200 dark:border-gray-700 ms-3">
+                    {experience.map((item, index) => (
+                      <TimelineItem 
+                        key={index} 
+                        item={item} 
+                        isLast={index === experience.length - 1}
+                      />
+                    ))}
+                  </ol>
+                </Section>
+
+                <Section title="Formação Acadêmica" icon={<AcademicCapIcon className="w-6 h-6 text-sky-600 print:w-5 print:h-5" />}>
+                  <div className="space-y-6 print:space-y-4">
+                    {education.map((edu, index) => (
+                      <div key={index}>
+                        <h3 className="text-lg font-semibold text-slate-800 print:text-base">{edu.degree}</h3>
+                        <p className="text-sm text-slate-600 print:text-xs">{edu.institution} • {edu.period}</p>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </Section>
+                </Section>
+
+                <Section 
+                  title="Certificações" 
+                  icon={<SparklesIcon className="w-6 h-6 text-sky-600 print:w-5 print:h-5" />} 
+                  className="hidden lg:block print:block"
+                >
+                  <div className="space-y-6 print:space-y-3">
+                    {certifications.map((group, index) => (
+                      <div key={index} className="mb-4 print:mb-2">
+                        <h4 className="font-semibold text-slate-800 mb-2 print:mb-1">{group.issuer}</h4>
+                        <div className="flex flex-wrap gap-2 print:gap-1">
+                          {group.certs.map((cert, certIndex) => (
+                            <span key={certIndex} className="bg-sky-100 text-sky-800 text-xs font-medium px-2.5 py-1 rounded-md print:px-2 print:py-0.5">
+                              {cert}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Section>
+              </>
+            )}
+
+            {activeTab === 'adapt' && <AdaptResume />}
           </div>
         </div>
       </main>
