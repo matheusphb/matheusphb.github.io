@@ -6,6 +6,26 @@ import { BriefcaseIcon, AcademicCapIcon, SparklesIcon, UserIcon, EnvelopeIcon, P
 import { PROFILE_IMAGE_BASE64 } from './assets';
 import AdaptResume from './components/AdaptResume';
 
+
+  return (
+    <div className="min-h-screen p-4 sm:p-8 bg-slate-100 flex items-center justify-center print:bg-white print:p-0">
+      {/* COLOQUE A LINHA DE TESTE AQUI */}
+      <h1 className="absolute top-0 left-0 bg-red-500 text-white p-2 font-bold z-50">VERSÃO DE TESTE DEPLOY</h1>
+
+      <main className="container mx-auto max-w-6xl bg-white shadow-2xl rounded-2xl relative print:shadow-none print:rounded-none print:w-full print:max-w-none">
+        
+        <button 
+          onClick={handlePrint}
+          className="absolute top-6 right-6 p-3 bg-sky-600 text-white rounded-full shadow-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300 transition-transform duration-200 hover:scale-105 print:hidden"
+          aria-label="Imprimir Currículo"
+        >
+          <PrinterIcon className="w-5 h-5" />
+        </button>
+      </main>
+    </div>
+  );
+};
+
 const Section: React.FC<{ title: string; icon: React.ReactNode; children: React.ReactNode; className?: string }> = ({ title, icon, children, className = '' }) => (
   <section className={`mb-10 print:mb-6 ${className}`}>
     <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3 border-b-2 border-slate-200 pb-2 print:text-xl print:mb-4">
