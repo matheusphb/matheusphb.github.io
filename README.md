@@ -9,11 +9,11 @@
 
 Um currículo interativo desenvolvido com React, TypeScript e Vite, com funcionalidades modernas e layout responsivo.
 
-## 🌟 Sobre o Projeto
+##  Sobre o Projeto
 
 Este projeto é uma versão digital e interativa do meu currículo pessoal, desenvolvido para demonstrar habilidades técnicas e oferecer uma apresentação mais dinâmica das minhas experiências profissionais e acadêmicas. O currículo conta com um design moderno, responsivo e funcionalidades avançadas de impressão.
 
-## 🚀 Funcionalidades
+##  Funcionalidades
 
 - **Design Responsivo**: Adaptável para desktop, tablet e mobile
 - **Impressão Otimizada**: Layout específico para impressão em PDF
@@ -21,7 +21,7 @@ Este projeto é uma versão digital e interativa do meu currículo pessoal, dese
 - **Componentes Reutilizáveis**: Arquitetura bem estruturada
 - **TypeScript**: Tipagem estática para maior confiabilidade
 
-## 🛠️ Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 - **React** - Biblioteca para construção da interface
 - **TypeScript** - Superset do JavaScript com tipagem estática
@@ -29,12 +29,12 @@ Este projeto é uma versão digital e interativa do meu currículo pessoal, dese
 - **Tailwind CSS** - Framework CSS utilitário (via classes inline)
 - **Heroicons** - Ícones SVG otimizados
 
-## 📋 Pré-requisitos
+##  Pré-requisitos
 
 - Node.js (versão 18 ou superior)
 - npm ou yarn
 
-## 🔧 Instalação e Execução
+##  Instalação e Execução
 
 1. Clone o repositório:
    ```bash
@@ -54,7 +54,7 @@ Este projeto é uma versão digital e interativa do meu currículo pessoal, dese
 
 4. Abra o navegador em [http://localhost:5173](http://localhost:5173)
 
-## 📦 Build para Produção
+##  Build para Produção
 
 Para gerar os arquivos otimizados para produção:
 
@@ -68,7 +68,7 @@ Para visualizar o build localmente:
 npm run preview
 ```
 
-## 📁 Estrutura do Projeto
+##  Estrutura do Projeto
 
 ```
 ├── components/          # Componentes reutilizáveis
@@ -85,7 +85,7 @@ npm run preview
 └── vite.config.ts      # Configuração do Vite
 ```
 
-## 🎨 Personalização
+##  Personalização
 
 Para personalizar o currículo com suas informações:
 
@@ -93,22 +93,22 @@ Para personalizar o currículo com suas informações:
 2. Substitua as imagens em `public/` pela sua foto de perfil
 3. Ajuste os estilos no arquivo `App.tsx` conforme necessário
 
-## 📱 Funcionalidades Especiais
+##  Funcionalidades Especiais
 
 - **Botão de Impressão**: Permite salvar o currículo em PDF diretamente do navegador
 - **Timeline Interativa**: Experiência profissional apresentada em formato timeline
 - **Seções Organizadas**: Divisão clara entre experiência, educação e habilidades
 - **Responsividade**: Layout que se adapta a diferentes tamanhos de tela
 
-## 🚀 Deploy
+##  Deploy
 
 O projeto está configurado para deploy automático no GitHub Pages através do domínio [matheusphb.github.io](https://matheusphb.github.io).
 
-## 📄 Licença
+##  Licença
 
 Este projeto está sob a licença MIT. Sinta-se livre para usar como template para seu próprio currículo.
 
-## 🤝 Contribuições
+##  Contribuições
 
 Contribuições são sempre bem-vindas! Sinta-se à vontade para:
 
@@ -116,7 +116,7 @@ Contribuições são sempre bem-vindas! Sinta-se à vontade para:
 - Sugerir melhorias
 - Enviar pull requests
 
-## 📧 Contato
+##  Contato
 
 **Matheus Costa de Araújo**
 - Email: mateusphb20@gmail.com
