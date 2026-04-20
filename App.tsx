@@ -1,10 +1,62 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { CV_DATA } from './constants';
-import { Experience } from './types';
+import { Experience, ProfileData, SkillGroup } from './types';
 import Pill from './components/Pill';
 import html2pdf from 'html2pdf.js';
 import { BriefcaseIcon, AcademicCapIcon, SparklesIcon, UserIcon, EnvelopeIcon, PhoneIcon, MapPinIcon, PrinterIcon, DownloadIcon, GithubIcon, CpuChipIcon } from './components/Icons';
 import profileImage from './perfil.png?url';
+
+const STORAGE_KEY = 'cv_profile_data_v1';
+
+const isProfileData = (value: unknown): value is ProfileData => {
+  if (!value || typeof value !== 'object') return false;
+  const data = value as Partial<ProfileData>;
+  return (
+    typeof data.name === 'string' &&
+    typeof data.title === 'string' &&
+    typeof data.summary === 'string' &&
+    typeof data.contact === 'object' &&
+    Array.isArray(data.experience) &&
+    Array.isArray(data.education) &&
+    Array.isArray(data.certifications) &&
+    Array.isArray(data.technicalSkills) &&
+    Array.isArray(data.recentHighlights) &&
+    Array.isArray(data.projects)
+  );
+};
+
+const loadProfileData = (): ProfileData => {
+  if (typeof window === 'undefined') return CV_DATA;
+  try {
+    const rawData = window.localStorage.getItem(STORAGE_KEY);
+    if (!rawData) return CV_DATA;
+    const parsedData = JSON.parse(rawData);
+    return isProfileData(parsedData) ? parsedData : CV_DATA;
+  } catch {
+    return CV_DATA;
+  }
+};
+
+const parseTechnicalSkills = (input: string): SkillGroup[] => {
+  return input
+    .split('\n')
+    .map(line => line.trim())
+    .filter(Boolean)
+    .map(line => {
+      const separatorIndex = line.indexOf(':');
+      if (separatorIndex === -1) return null;
+      const category = line.slice(0, separatorIndex).trim();
+      const skills = line
+        .slice(separatorIndex + 1)
+        .split(',')
+        .map(skill => skill.trim())
+        .filter(Boolean);
+
+      if (!category || skills.length === 0) return null;
+      return { category, skills };
+    })
+    .filter((group): group is SkillGroup => group !== null);
+};
 
 const Section: React.FC<{ title: string; icon: React.ReactNode; children: React.ReactNode; className?: string }> = ({ title, icon, children, className = '' }) => (
   <section className={`mb-10 rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 shadow-sm print:mb-6 print:rounded-none print:border-slate-300 print:shadow-none ${className}`}>
@@ -28,11 +80,80 @@ const TimelineItem: React.FC<{ item: Experience; isLast: boolean }> = ({ item, i
 );
 
 const App: React.FC = () => {
-  const { name, title, summary, contact, experience, education, certifications, technicalSkills, recentHighlights, projects } = CV_DATA;
+  const [profileData, setProfileData] = useState<ProfileData>(() => loadProfileData());
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [skillsDraft, setSkillsDraft] = useState('');
+  const [jsonDraft, setJsonDraft] = useState('');
+  const [panelError, setPanelError] = useState('');
   const contentRef = useRef<HTMLDivElement>(null);
+  const { name, title, summary, contact, experience, education, certifications, technicalSkills, recentHighlights, projects } = profileData;
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(profileData));
+  }, [profileData]);
+
+  useEffect(() => {
+    setJsonDraft(JSON.stringify(profileData, null, 2));
+  }, [profileData]);
+
+  const skillText = useMemo(
+    () => technicalSkills.map(group => `${group.category}: ${group.skills.join(', ')}`).join('\n'),
+    [technicalSkills],
+  );
+
+  useEffect(() => {
+    setSkillsDraft(skillText);
+  }, [skillText]);
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const updateContact = (field: keyof ProfileData['contact'], value: string) => {
+    setProfileData(prevData => ({
+      ...prevData,
+      contact: {
+        ...prevData.contact,
+        [field]: value,
+      },
+    }));
+  };
+
+  const handleApplySkills = () => {
+    const parsedSkills = parseTechnicalSkills(skillsDraft);
+    if (parsedSkills.length === 0) {
+      setPanelError('Competências inválidas. Use: Categoria: skill1, skill2');
+      return;
+    }
+
+    setProfileData(prevData => ({
+      ...prevData,
+      technicalSkills: parsedSkills,
+    }));
+    setPanelError('');
+  };
+
+  const handleApplyJson = () => {
+    try {
+      const parsedData = JSON.parse(jsonDraft);
+      if (!isProfileData(parsedData)) {
+        setPanelError('JSON inválido para o formato do currículo.');
+        return;
+      }
+      setProfileData(parsedData);
+      setPanelError('');
+    } catch {
+      setPanelError('JSON inválido. Verifique a sintaxe.');
+    }
+  };
+
+  const handleResetData = () => {
+    setProfileData(CV_DATA);
+    if (typeof window !== 'undefined') {
+      window.localStorage.removeItem(STORAGE_KEY);
+    }
+    setPanelError('');
   };
 
   const handleDownloadPdf = async () => {
@@ -65,6 +186,14 @@ const App: React.FC = () => {
     <div className="min-h-screen p-4 sm:p-8 bg-slate-100 flex items-center justify-center print:bg-white print:p-0">
       <main className="container mx-auto max-w-6xl bg-white border border-slate-200 shadow-2xl rounded-2xl relative print:shadow-none print:rounded-none print:border-slate-300 print:w-full print:max-w-none">
         <div className="sticky top-4 z-20 flex justify-end gap-3 px-4 pt-4 sm:px-8 sm:pt-6 print:hidden">
+          <button
+            onClick={() => setIsPanelOpen(true)}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white text-slate-700 border border-slate-300 rounded-lg shadow-lg hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200 transition-transform duration-200 hover:scale-105"
+            aria-label="Abrir painel de controle"
+          >
+            <CpuChipIcon className="w-5 h-5" />
+            <span className="text-sm font-medium">Painel</span>
+          </button>
           <button
             onClick={handleDownloadPdf}
             className="inline-flex items-center gap-2 px-4 py-2 bg-sky-600 text-white rounded-lg shadow-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300 transition-transform duration-200 hover:scale-105"
@@ -225,6 +354,132 @@ const App: React.FC = () => {
           </div>
         </div>
       </main>
+
+      {isPanelOpen && (
+        <div className="fixed inset-0 z-30 bg-slate-900/30 print:hidden">
+          <div className="absolute right-0 top-0 h-full w-full max-w-xl bg-white shadow-2xl border-l border-slate-200 p-5 sm:p-6 overflow-y-auto">
+            <div className="flex items-center justify-between mb-5">
+              <h3 className="text-xl font-bold text-slate-900">Painel de Controle</h3>
+              <button
+                onClick={() => setIsPanelOpen(false)}
+                className="px-3 py-2 rounded-md text-sm font-medium bg-slate-100 text-slate-700 hover:bg-slate-200"
+              >
+                Fechar
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-1">Nome</label>
+                <input
+                  value={name}
+                  onChange={event => setProfileData(prevData => ({ ...prevData, name: event.target.value }))}
+                  className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-1">Título</label>
+                <input
+                  value={title}
+                  onChange={event => setProfileData(prevData => ({ ...prevData, title: event.target.value }))}
+                  className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-1">Resumo Profissional</label>
+                <textarea
+                  value={summary}
+                  onChange={event => setProfileData(prevData => ({ ...prevData, summary: event.target.value }))}
+                  rows={4}
+                  className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1">Email</label>
+                  <input
+                    value={contact.email}
+                    onChange={event => updateContact('email', event.target.value)}
+                    className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1">Telefone</label>
+                  <input
+                    value={contact.phone}
+                    onChange={event => updateContact('phone', event.target.value)}
+                    className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1">Localização</label>
+                  <input
+                    value={contact.location}
+                    onChange={event => updateContact('location', event.target.value)}
+                    className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1">GitHub</label>
+                  <input
+                    value={contact.github ?? ''}
+                    onChange={event => updateContact('github', event.target.value)}
+                    className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-1">Competências Técnicas</label>
+                <p className="text-xs text-slate-500 mb-2">Formato: Categoria: skill1, skill2</p>
+                <textarea
+                  value={skillsDraft}
+                  onChange={event => setSkillsDraft(event.target.value)}
+                  rows={8}
+                  className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm font-mono"
+                />
+                <button
+                  onClick={handleApplySkills}
+                  className="mt-2 px-3 py-2 rounded-md bg-sky-600 text-white text-sm font-medium hover:bg-sky-700"
+                >
+                  Aplicar Competências
+                </button>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-1">Editor Completo (JSON)</label>
+                <textarea
+                  value={jsonDraft}
+                  onChange={event => setJsonDraft(event.target.value)}
+                  rows={14}
+                  className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm font-mono"
+                />
+                <div className="mt-2 flex gap-2">
+                  <button
+                    onClick={handleApplyJson}
+                    className="px-3 py-2 rounded-md bg-slate-700 text-white text-sm font-medium hover:bg-slate-800"
+                  >
+                    Aplicar JSON
+                  </button>
+                  <button
+                    onClick={handleResetData}
+                    className="px-3 py-2 rounded-md bg-red-100 text-red-700 text-sm font-medium hover:bg-red-200"
+                  >
+                    Restaurar Padrão
+                  </button>
+                </div>
+              </div>
+
+              {panelError && (
+                <p className="text-sm font-medium text-red-600">{panelError}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
