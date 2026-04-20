@@ -29,6 +29,11 @@ export interface SkillGroup {
   skills: string[];
 }
 
+export interface HighlightItem {
+  title: string;
+  description: string;
+}
+
 export interface ProfileData {
   name: string;
   title: string;
@@ -38,4 +43,6 @@ export interface ProfileData {
   education: Education[];
   certifications: CertificationGroup[];
   technicalSkills: SkillGroup[];
+  recentHighlights: HighlightItem[];
+  projects: HighlightItem[];
 }

@@ -27,7 +27,7 @@ const TimelineItem: React.FC<{ item: Experience; isLast: boolean }> = ({ item, i
 );
 
 const App: React.FC = () => {
-  const { name, title, summary, contact, experience, education, certifications, technicalSkills } = CV_DATA;
+  const { name, title, summary, contact, experience, education, certifications, technicalSkills, recentHighlights, projects } = CV_DATA;
 
   const handlePrint = () => {
     window.print();
@@ -129,6 +129,28 @@ const App: React.FC = () => {
                   />
                 ))}
               </ol>
+            </Section>
+
+            <Section title="Destaques Recentes" icon={<SparklesIcon className="w-6 h-6 text-sky-600 print:w-5 print:h-5" />}>
+              <div className="grid gap-4 md:grid-cols-2 print:gap-3">
+                {recentHighlights.map((item, index) => (
+                  <article key={index} className="rounded-xl border border-slate-200 bg-slate-50 p-4 shadow-sm print:p-3 print:rounded-lg">
+                    <h3 className="text-base font-semibold text-slate-800 mb-2 print:text-sm">{item.title}</h3>
+                    <p className="text-sm leading-relaxed text-slate-600 print:text-xs">{item.description}</p>
+                  </article>
+                ))}
+              </div>
+            </Section>
+
+            <Section title="Projetos e Conquistas" icon={<SparklesIcon className="w-6 h-6 text-sky-600 print:w-5 print:h-5" />}>
+              <div className="space-y-4 print:space-y-3">
+                {projects.map((item, index) => (
+                  <div key={index} className="rounded-xl border border-slate-200 p-4 print:p-3">
+                    <h3 className="text-base font-semibold text-slate-800 mb-1 print:text-sm">{item.title}</h3>
+                    <p className="text-sm leading-relaxed text-slate-600 print:text-xs">{item.description}</p>
+                  </div>
+                ))}
+              </div>
             </Section>
 
             <Section title="Formação Acadêmica" icon={<AcademicCapIcon className="w-6 h-6 text-sky-600 print:w-5 print:h-5" />}>

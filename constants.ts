@@ -2,8 +2,8 @@ import { ProfileData } from './types';
 
 export const CV_DATA: ProfileData = {
   name: "Matheus Costa de Araújo",
-  title: "Analista de Suporte Técnico | Especialista em ERP | Engenheiro de Software em Formação",
-  summary: "Analista de Suporte Técnico com experiência em sistemas ERP (WinThor, Procfit, Fortes AC), servidores e automação de processos. Atendo mais de 2.300 usuários, garantindo alta disponibilidade e segurança em ambientes críticos de TI. Atuação comprovada na resolução de falhas em rotinas fiscais, inventários e integrações com bancos de dados Oracle e SQL Server. Atualmente, curso Engenharia de Software e possuo certificações em Cloud (AWS, Google Cloud, Oracle) e Banco de Dados (MongoDB), buscando aplicar meu conhecimento em soluções escaláveis e seguras.",
+  title: "Analista de Suporte ERP | Especialista em Automação e Administração de Bancos de Dados",
+  summary: "Analista de Suporte ERP e graduando em Engenharia de Software, com foco em automação de processos, administração de bancos de dados e resolução de incidentes críticos. Atuação voltada à padronização de ambientes, análise de performance e sustentação de operações em sistemas corporativos de alta demanda.",
   contact: {
     email: "mateusphb20@gmail.com",
     phone: "+55 (86) 99449-1061",
@@ -15,7 +15,7 @@ export const CV_DATA: ProfileData = {
       role: "Analista de Suporte Técnico",
       company: "Casa o Toureiro",
       period: "junho de 2023 - presente",
-      description: "Suporte especializado para os sistemas ERP TOTVS WinThor, Procfit e Fortes AC, atendendo mais de 2.300 usuários. Gestão e resolução de chamados técnicos envolvendo criação de usuários, perfis de acesso, auditorias e inventários. Correção de falhas em rotinas críticas (notas fiscais, PDVs, rejeições fiscais) e ajustes em integrações com bancos de dados Oracle e SQL Server. Manutenção e monitoramento de servidores Windows/Linux, assegurando alta disponibilidade e segurança. Desenvolvimento de scripts de automação que reduziram em aproximadamente 20% o tempo gasto em tarefas manuais. Apoio em projetos de integração com BI (Power BI) e melhorias contínuas.",
+      description: "• Automação de Infraestrutura: Desenvolvimento e implementação de scripts em PowerShell para automatizar a instalação de bancos de dados em PDVs, reduzindo drasticamente o tempo de configuração manual e garantindo a padronização do ambiente.\n• Administração de Dados: Responsável pela manutenção de servidores Windows/Linux e bancos de dados críticos, realizando a migração e configuração de ambientes de teste Oracle 19c idênticos à produção para validação segura de processos.\n• Análise de Performance: Execução de auditorias e análises de gargalos em bancos de dados de larga escala, utilizando scripts de diagnóstico para identificar falhas estruturais e de performance diretamente em produção.\n• Suporte Especializado ERP: Resolução de erros complexos em rotinas do WinThor por meio de traces e análise profunda de dicionários de dados, garantindo a continuidade da operação para mais de 2300 usuários.",
     },
     {
       role: "Encarregado da Logística de Devolução",
@@ -56,22 +56,48 @@ export const CV_DATA: ProfileData = {
     }
   ],
   technicalSkills: [
-    { category: 'ERP e Gestão', skills: ['TOTVS Winthor (Varejo e Distribuição)', 'Procfit', 'Fortes AC'] },
-    { category: 'Banco de Dados', skills: ['SQL', 'PL/SQL', 'Oracle Database', 'SQL Server', 'MongoDB', 'XML'] },
-    { category: 'Cloud Computing', skills: ['AWS', 'Google Cloud Platform (GCP)', 'Oracle Cloud Infrastructure (OCI)'] },
-    { category: 'Sistemas Operacionais', skills: ['Windows Server', 'Linux'] },
-    { category: 'Infraestrutura como Código (IaC)', skills: ['Terraform'] },
-    { category: 'Redes e Segurança', skills: ['VPC', 'Balanceamento de Carga', 'IAM', 'Segurança em Nuvem'] },
-    { category: 'Automação e Programação', skills: ['Scripts de Automação', '.NET Framework (básico)', 'Lógica de Programação'] },
-    { category: 'Outras Ferramentas', skills: ['Active Directory', 'Resolução de Problemas de Hardware e Software', 'Power BI (Integração com ERP)'] }
+    { category: 'Bancos de Dados', skills: ['Oracle (PL/SQL, 11g/18c/19c)', 'SQL Server', 'Firebird', 'MongoDB'] },
+    { category: 'Linguagens e Automação', skills: ['PowerShell (Automação de Infra)', 'Python (Selenium para Web Scraping)', '.NET Framework', 'Scripts de automação de sistema'] },
+    { category: 'Sistemas ERP', skills: ['Domínio do ecossistema TOTVS WinThor', 'Rotinas fiscais e de distribuição', 'ProcFit'] },
+    { category: 'Cloud e Infra', skills: ['AWS', 'Google Cloud', 'Oracle Cloud Infrastructure (OCI)', 'Terraform'] },
+    { category: 'Sistemas Operacionais', skills: ['Windows Server', 'Linux', 'Active Directory', 'Gerenciamento de usuários'] },
+    { category: 'Outras Ferramentas', skills: ['Power BI', 'Resolução de problemas de hardware/software'] }
+  ],
+  recentHighlights: [
+    {
+      title: 'Automação de Infraestrutura',
+      description: 'Desenvolvimento e implementação de scripts em PowerShell para automatizar a instalação de bancos de dados em PDVs, reduzindo o tempo de configuração manual e padronizando ambientes.',
+    },
+    {
+      title: 'Administração de Dados',
+      description: 'Manutenção de servidores Windows/Linux e bancos de dados críticos, com migração e configuração de ambientes de teste Oracle 19c idênticos à produção.',
+    },
+    {
+      title: 'Análise de Performance',
+      description: 'Auditorias e análises de gargalos em bancos de dados de larga escala, com scripts de diagnóstico para identificar falhas estruturais e de performance em produção.',
+    },
+    {
+      title: 'Suporte Especializado ERP',
+      description: 'Resolução de erros complexos em rotinas do WinThor por meio de traces e análise profunda de dicionários de dados, sustentando a operação para mais de 2300 usuários.',
+    },
+  ],
+  projects: [
+    {
+      title: 'MVP Android e Reporte Crítico',
+      description: 'Desenvolvimento de aplicativos MVP para Android e histórico de reporte de falhas críticas em sistemas de software.',
+    },
+    {
+      title: 'Fábrica de Software',
+      description: 'Planejamento de padronização de processos de desenvolvimento utilizando modelos CMMI e MPS.BR.',
+    },
   ],
   certifications: [
     {
       issuer: "Google Cloud",
       certs: [
-        "Google Cloud Computing Foundations (2024)",
-        "Build Infrastructure with Terraform (2024)",
-        "Build a Secure Google Cloud Network (2024)"
+        "Google Cloud Computing Foundations (2025)",
+        "Build Infrastructure with Terraform (2025)",
+        "Build a Secure Google Cloud Network (2025)"
       ]
     },
     {
@@ -83,21 +109,21 @@ export const CV_DATA: ProfileData = {
     {
       issuer: "Amazon Web Services",
       certs: [
-        "AWS Educate Introduction to Cloud 101 (2024)"
+        "AWS Educate Introduction to Cloud 101 (2025)"
       ]
     },
     {
       issuer: "MongoDB",
       certs: [
-        "MongoDB Database Administrator Path (2024)",
-        "MongoDB Data Modeling (2024)",
-        "MongoDB Indexes (2024)"
+        "MongoDB Database Administrator Path (2025)",
+        "MongoDB Data Modeling (2025)",
+        "MongoDB Indexes (2025)"
       ]
     },
     {
       issuer: "TOTVS",
       certs: [
-        "TOTVS Varejo e Distribuição - Linha Winthor - Distribuidor (2023)"
+        "TOTVS Varejo e Distribuição - Linha Winthor - Distribuidor (2025)"
       ]
     }
   ],
