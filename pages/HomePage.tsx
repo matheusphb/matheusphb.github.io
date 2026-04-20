@@ -4,11 +4,11 @@ import { Experience, ProfileData } from '../types';
 import Pill from '../components/Pill';
 import html2pdf from 'html2pdf.js';
 import { BriefcaseIcon, AcademicCapIcon, SparklesIcon, UserIcon, EnvelopeIcon, PhoneIcon, MapPinIcon, PrinterIcon, DownloadIcon, GithubIcon } from '../components/Icons';
+// @ts-ignore
 import profileImage from '../perfil.png?url';
 
 interface HomePageProps {
   profileData: ProfileData;
-  onUpdate: (data: ProfileData) => void;
 }
 
 const Section: React.FC<{ title: string; icon: React.ReactNode; children: React.ReactNode; className?: string }> = ({ title, icon, children, className = '' }) => (
@@ -21,7 +21,7 @@ const Section: React.FC<{ title: string; icon: React.ReactNode; children: React.
   </section>
 );
 
-const TimelineItem: React.FC<{ item: Experience; isLast: boolean }> = ({ item, isLast }) => (
+const TimelineItem: React.FC<{ item: Experience }> = ({ item }) => (
   <li className="mb-10 ms-6 print:mb-6">
     <span className="absolute flex items-center justify-center w-6 h-6 bg-sky-100 rounded-full -start-3 ring-8 ring-white dark:ring-slate-50 dark:bg-sky-900 print:w-5 print:h-5 print:ring-4">
       <BriefcaseIcon className="w-3 h-3 text-sky-600 print:w-2.5 print:h-2.5" />
@@ -32,7 +32,7 @@ const TimelineItem: React.FC<{ item: Experience; isLast: boolean }> = ({ item, i
   </li>
 );
 
-const HomePage: React.FC<HomePageProps> = ({ profileData, onUpdate }) => {
+const HomePage: React.FC<HomePageProps> = ({ profileData }) => {
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const { name, title, summary, contact, experience, education, certifications, technicalSkills, recentHighlights, projects } = profileData;
@@ -50,9 +50,9 @@ const HomePage: React.FC<HomePageProps> = ({ profileData, onUpdate }) => {
       const width = element.scrollWidth;
       const height = element.scrollHeight;
       const opt = {
-        margin: [10, 10, 10, 10],
+        margin: [10, 10, 10, 10] as [number, number, number, number],
         filename: 'matheus-costa-de-araujo-curriculo.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
+        image: { type: 'jpeg' as const, quality: 0.98 },
         html2canvas: {
           scale: 1.5,
           useCORS: true,
@@ -62,9 +62,9 @@ const HomePage: React.FC<HomePageProps> = ({ profileData, onUpdate }) => {
           scrollX: 0,
           scrollY: 0,
         },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: ['css', 'legacy', 'avoid-all'] },
-      } as const;
+        jsPDF: { unit: 'mm' as const, format: 'a4' as const, orientation: 'portrait' as const },
+        pagebreak: { mode: ['css', 'legacy', 'avoid-all'] as const },
+      };
 
       await html2pdf().set(opt).from(element).save();
     } finally {
@@ -189,8 +189,7 @@ const HomePage: React.FC<HomePageProps> = ({ profileData, onUpdate }) => {
                 {experience.map((item, index) => (
                   <TimelineItem 
                     key={index} 
-                    item={item} 
-                    isLast={index === experience.length - 1}
+                    item={item}
                   />
                 ))}
               </ol>
