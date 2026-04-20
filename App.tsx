@@ -7,7 +7,7 @@ import { BriefcaseIcon, AcademicCapIcon, SparklesIcon, UserIcon, EnvelopeIcon, P
 import profileImage from './perfil.png?url';
 
 const Section: React.FC<{ title: string; icon: React.ReactNode; children: React.ReactNode; className?: string }> = ({ title, icon, children, className = '' }) => (
-  <section className={`mb-10 print:mb-6 ${className}`}>
+  <section className={`mb-10 rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 shadow-sm print:mb-6 print:rounded-none print:border-slate-300 print:shadow-none ${className}`}>
     <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3 border-b-2 border-slate-200 pb-2 print:text-xl print:mb-4">
       {icon}
       <span>{title}</span>
@@ -53,7 +53,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen p-4 sm:p-8 bg-slate-100 flex items-center justify-center print:bg-white print:p-0">
-      <main className="container mx-auto max-w-6xl bg-white shadow-2xl rounded-2xl relative print:shadow-none print:rounded-none print:w-full print:max-w-none">
+      <main className="container mx-auto max-w-6xl bg-white border border-slate-200 shadow-2xl rounded-2xl relative print:shadow-none print:rounded-none print:border-slate-300 print:w-full print:max-w-none">
         <div className="sticky top-4 z-20 flex justify-end gap-3 px-4 pt-4 sm:px-8 sm:pt-6 print:hidden">
           <button
             onClick={handleDownloadPdf}
@@ -75,7 +75,7 @@ const App: React.FC = () => {
 
         <div ref={contentRef} className="p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-3 gap-12 print:grid-cols-3 print:gap-8 print:p-6">
           {/* Left Column (Sidebar) */}
-          <aside className="lg:col-span-1 print:col-span-1">
+          <aside className="lg:col-span-1 print:col-span-1 lg:pr-8 lg:border-r lg:border-slate-200 print:border-slate-300">
             <div className="text-center lg:text-left">
                 <img src={profileImage} alt="Foto do Perfil" className="w-40 h-40 rounded-full mx-auto mb-4 shadow-md border-4 border-white object-cover print:w-28 print:h-28 print:shadow-none print:border-2"/>
                 <h1 className="text-4xl font-bold text-slate-900 print:text-3xl">{name}</h1>
@@ -142,7 +142,7 @@ const App: React.FC = () => {
           </aside>
           
           {/* Right Column (Main Content) */}
-          <div className="lg:col-span-2 print:col-span-2">
+          <div className="lg:col-span-2 print:col-span-2 lg:pl-2">
             <Section title="Resumo Profissional" icon={<UserIcon className="w-6 h-6 text-sky-600 print:w-5 print:h-5" />}>
               <p className="leading-relaxed print:text-sm">{summary}</p>
             </Section>
@@ -162,7 +162,7 @@ const App: React.FC = () => {
             <Section title="Destaques Recentes" icon={<SparklesIcon className="w-6 h-6 text-sky-600 print:w-5 print:h-5" />}>
               <div className="grid gap-4 md:grid-cols-2 print:gap-3">
                 {recentHighlights.map((item, index) => (
-                  <article key={index} className="rounded-xl border border-slate-200 bg-slate-50 p-4 shadow-sm print:p-3 print:rounded-lg">
+                  <article key={index} className="rounded-xl border-2 border-slate-300 bg-slate-50 p-4 shadow-sm print:p-3 print:rounded-lg print:border-slate-400">
                     <h3 className="text-base font-semibold text-slate-800 mb-2 print:text-sm">{item.title}</h3>
                     <p className="text-sm leading-relaxed text-slate-600 print:text-xs">{item.description}</p>
                   </article>
@@ -173,7 +173,7 @@ const App: React.FC = () => {
             <Section title="Projetos e Conquistas" icon={<SparklesIcon className="w-6 h-6 text-sky-600 print:w-5 print:h-5" />}>
               <div className="space-y-4 print:space-y-3">
                 {projects.map((item, index) => (
-                  <div key={index} className="rounded-xl border border-slate-200 p-4 print:p-3">
+                  <div key={index} className="rounded-xl border-2 border-slate-300 bg-white p-4 print:p-3 print:border-slate-400">
                     <h3 className="text-base font-semibold text-slate-800 mb-1 print:text-sm">{item.title}</h3>
                     <p className="text-sm leading-relaxed text-slate-600 print:text-xs">{item.description}</p>
                   </div>
