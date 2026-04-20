@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { CV_DATA } from '../constants';
 import { ProfileData } from '../types';
 import { parseTechnicalSkills, isProfileData } from '../utils/validation';
+import { ExperienceForm } from '../components/ExperienceForm';
+import { EducationForm } from '../components/EducationForm';
+import { SkillsEditor } from '../components/SkillsEditor';
 
 const STORAGE_KEY = 'cv_profile_data_v1';
 
@@ -12,17 +15,11 @@ interface PanelPageProps {
 }
 
 const PanelPage: React.FC<PanelPageProps> = ({ profileData, onUpdate }) => {
-  const [skillsDraft, setSkillsDraft] = useState(
-    profileData.technicalSkills.map(group => `${group.category}: ${group.skills.join(', ')}`).join('\n')
-  );
   const [jsonDraft, setJsonDraft] = useState(JSON.stringify(profileData, null, 2));
   const [error, setError] = useState('');
 
   // Sincroniza drafts apenas quando a chave mudar completamente
   useEffect(() => {
-    setSkillsDraft(
-      profileData.technicalSkills.map(group => `${group.category}: ${group.skills.join(', ')}`).join('\n')
-    );
     setJsonDraft(JSON.stringify(profileData, null, 2));
   }, [JSON.stringify(profileData)]);
 
@@ -37,16 +34,6 @@ const PanelPage: React.FC<PanelPageProps> = ({ profileData, onUpdate }) => {
       (update as any)[field] = value;
     }
     onUpdate(update);
-  };
-
-  const handleApplySkills = () => {
-    const parsedSkills = parseTechnicalSkills(skillsDraft);
-    if (parsedSkills.length === 0) {
-      setError('Competências inválidas. Use: Categoria: skill1, skill2');
-      return;
-    }
-    onUpdate({ ...profileData, technicalSkills: parsedSkills });
-    setError('');
   };
 
   const handleApplyJson = () => {
@@ -72,24 +59,30 @@ const PanelPage: React.FC<PanelPageProps> = ({ profileData, onUpdate }) => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 p-4 sm:p-8">
-      <div className="mx-auto max-w-4xl">
-        {/* Header */}
-        <div className="mb-8 flex items-center justify-between">
+    <div className="min-h-screen bg-slate-50 p-4 sm:p-8 relative">
+      {/* Blobs de fundo */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -left-40 w-80 h-80 bg-sky-300 rounded-full mix-blend-multiply filter blur-[80px] opacity-10" />
+        <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-[80px] opacity-10" />
+      </div>
+
+      <div className="mx-auto max-w-4xl relative z-10">
+        {/* Header com glassmorphism */}
+        <div className="mb-8 flex items-center justify-between backdrop-blur-md bg-white/30 rounded-xl p-6 border border-white/20 shadow-lg">
           <div>
             <h1 className="text-4xl font-bold text-slate-900">Painel de Controle</h1>
             <p className="text-lg text-slate-600 mt-2">Edite seu currículo em tempo real</p>
           </div>
           <Link
             to="/"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors font-medium"
           >
             ← Voltar ao CV
           </Link>
         </div>
 
-        {/* Main Content */}
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-lg p-6 sm:p-8">
+        {/* Main Content com glassmorphism */}
+        <div className="bg-white/80 backdrop-blur-md rounded-2xl border border-white/20 shadow-2xl p-6 sm:p-8">
           <div className="space-y-6">
             {/* Basic Info */}
             <div className="border-b border-slate-200 pb-6">
@@ -170,21 +163,28 @@ const PanelPage: React.FC<PanelPageProps> = ({ profileData, onUpdate }) => {
             {/* Technical Skills */}
             <div className="border-b border-slate-200 pb-6">
               <h2 className="text-2xl font-semibold text-slate-900 mb-4">Competências Técnicas</h2>
-              <p className="text-sm text-slate-600 mb-3">
-                Formato: <code className="bg-slate-100 px-2 py-1 rounded">Categoria: skill1, skill2</code>
-              </p>
-              <textarea
-                value={skillsDraft}
-                onChange={e => setSkillsDraft(e.target.value)}
-                rows={10}
-                className="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-sky-500 mb-3"
+              <SkillsEditor 
+                skills={profileData.technicalSkills}
+                onUpdate={(skills) => onUpdate({ ...profileData, technicalSkills: skills })}
               />
-              <button
-                onClick={handleApplySkills}
-                className="px-6 py-2 rounded-lg bg-sky-600 text-white font-medium hover:bg-sky-700 transition-colors"
-              >
-                Aplicar Competências
-              </button>
+            </div>
+
+            {/* Experience */}
+            <div className="border-b border-slate-200 pb-6">
+              <h2 className="text-2xl font-semibold text-slate-900 mb-4">Experiência Profissional</h2>
+              <ExperienceForm
+                experiences={profileData.experience}
+                onUpdate={(experiences) => onUpdate({ ...profileData, experience: experiences })}
+              />
+            </div>
+
+            {/* Education */}
+            <div className="border-b border-slate-200 pb-6">
+              <h2 className="text-2xl font-semibold text-slate-900 mb-4">Formação Acadêmica</h2>
+              <EducationForm
+                education={profileData.education}
+                onUpdate={(education) => onUpdate({ ...profileData, education: education })}
+              />
             </div>
 
             {/* JSON Editor */}

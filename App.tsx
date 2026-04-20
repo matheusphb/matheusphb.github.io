@@ -30,10 +30,20 @@ const App: React.FC = () => {
 
   return (
     <HashRouter>
-      <Routes>
-        <Route path="/" element={<HomePage profileData={profileData} onUpdate={setProfileData} />} />
-        <Route path="/painel" element={<PanelPage profileData={profileData} onUpdate={setProfileData} />} />
-      </Routes>
+      {/* Blobs de fundo atmosféricos */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-[120px] opacity-20 animate-pulse" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-[120px] opacity-20 animate-pulse" />
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-sky-400 rounded-full mix-blend-multiply filter blur-[120px] opacity-15 animate-pulse" />
+      </div>
+
+      {/* Conteúdo da aplicação */}
+      <div className="relative z-10">
+        <Routes>
+          <Route path="/" element={<HomePage profileData={profileData} onUpdate={setProfileData} />} />
+          <Route path="/painel" element={<PanelPage profileData={profileData} onUpdate={setProfileData} />} />
+        </Routes>
+      </div>
     </HashRouter>
   );
 };

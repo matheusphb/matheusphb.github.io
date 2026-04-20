@@ -56,12 +56,39 @@ export const CV_DATA: ProfileData = {
     }
   ],
   technicalSkills: [
-    { category: 'Bancos de Dados', skills: ['Oracle (PL/SQL, 11g/18c/19c)', 'SQL Server', 'Firebird', 'MongoDB'] },
-    { category: 'Linguagens e Automação', skills: ['PowerShell (Automação de Infra)', 'Python (Selenium para Web Scraping)', '.NET Framework', 'Scripts de automação de sistema'] },
-    { category: 'Sistemas ERP', skills: ['Domínio do ecossistema TOTVS WinThor', 'Rotinas fiscais e de distribuição', 'ProcFit'] },
-    { category: 'Cloud e Infra', skills: ['AWS', 'Google Cloud', 'Oracle Cloud Infrastructure (OCI)', 'Terraform'] },
-    { category: 'Sistemas Operacionais', skills: ['Windows Server', 'Linux', 'Active Directory', 'Gerenciamento de usuários'] },
-    { category: 'Outras Ferramentas', skills: ['Power BI', 'Resolução de problemas de hardware/software'] }
+    { category: 'Bancos de Dados', skills: [
+      { name: 'Oracle (PL/SQL, 11g/18c/19c)', proficiency: 90 },
+      { name: 'SQL Server', proficiency: 85 },
+      { name: 'Firebird', proficiency: 80 },
+      { name: 'MongoDB', proficiency: 75 }
+    ]},
+    { category: 'Linguagens e Automação', skills: [
+      { name: 'PowerShell (Automação de Infra)', proficiency: 88 },
+      { name: 'Python (Selenium para Web Scraping)', proficiency: 78 },
+      { name: '.NET Framework', proficiency: 72 },
+      { name: 'Scripts de automação de sistema', proficiency: 85 }
+    ]},
+    { category: 'Sistemas ERP', skills: [
+      { name: 'Domínio do ecossistema TOTVS WinThor', proficiency: 92 },
+      { name: 'Rotinas fiscais e de distribuição', proficiency: 88 },
+      { name: 'ProcFit', proficiency: 75 }
+    ]},
+    { category: 'Cloud e Infra', skills: [
+      { name: 'AWS', proficiency: 76 },
+      { name: 'Google Cloud', proficiency: 78 },
+      { name: 'Oracle Cloud Infrastructure (OCI)', proficiency: 80 },
+      { name: 'Terraform', proficiency: 75 }
+    ]},
+    { category: 'Sistemas Operacionais', skills: [
+      { name: 'Windows Server', proficiency: 88 },
+      { name: 'Linux', proficiency: 82 },
+      { name: 'Active Directory', proficiency: 85 },
+      { name: 'Gerenciamento de usuários', proficiency: 80 }
+    ]},
+    { category: 'Outras Ferramentas', skills: [
+      { name: 'Power BI', proficiency: 70 },
+      { name: 'Resolução de problemas de hardware/software', proficiency: 90 }
+    ]}
   ],
   recentHighlights: [
     {

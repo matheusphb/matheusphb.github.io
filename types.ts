@@ -10,6 +10,7 @@ export interface Education {
   degree: string;
   institution: string;
   period: string;
+  description?: string;
 }
 
 export interface CertificationGroup {
@@ -24,9 +25,14 @@ export interface Contact {
     github?: string;
 }
 
+export interface Skill {
+  name: string;
+  proficiency: number; // 0-100
+}
+
 export interface SkillGroup {
   category: string;
-  skills: string[];
+  skills: Skill[];
 }
 
 export interface HighlightItem {

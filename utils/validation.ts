@@ -26,13 +26,19 @@ export const parseTechnicalSkills = (input: string): SkillGroup[] => {
       const separatorIndex = line.indexOf(':');
       if (separatorIndex === -1) return null;
       const category = line.slice(0, separatorIndex).trim();
-      const skills = line
+      const skillsText = line
         .slice(separatorIndex + 1)
         .split(',')
         .map(skill => skill.trim())
         .filter(Boolean);
 
-      if (!category || skills.length === 0) return null;
+      if (!category || skillsText.length === 0) return null;
+      
+      const skills = skillsText.map(skillName => ({
+        name: skillName,
+        proficiency: 75 // Valor padrão
+      }));
+      
       return { category, skills };
     })
     .filter((group): group is SkillGroup => group !== null);

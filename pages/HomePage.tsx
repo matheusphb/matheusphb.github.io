@@ -151,13 +151,22 @@ const HomePage: React.FC<HomePageProps> = ({ profileData }) => {
                 <span>Competências Técnicas</span>
               </h3>
               {technicalSkills.map((group, index) => (
-                <div key={index} className="mb-4 print:mb-2">
-                  <h4 className="font-semibold text-slate-700 text-sm mb-2 print:mb-1">{group.category}</h4>
-                  <div className="flex flex-wrap gap-1.5 print:gap-1">
+                <div key={index} className="mb-6 print:mb-3">
+                  <h4 className="font-semibold text-slate-700 text-sm mb-3 print:mb-2">{group.category}</h4>
+                  <div className="space-y-2 print:space-y-1">
                     {group.skills.map((skill, skillIndex) => (
-                      <span key={skillIndex} className="bg-slate-200 text-slate-800 text-xs font-medium px-2.5 py-1 rounded-md print:px-2 print:py-0.5 print:text-xs">
-                        {skill}
-                      </span>
+                      <div key={skillIndex} className="space-y-1">
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs font-medium text-slate-800 print:text-xs">{skill.name}</span>
+                          <span className="text-xs text-slate-600 font-semibold print:text-xs">{skill.proficiency}%</span>
+                        </div>
+                        <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden print:h-1.5">
+                          <div
+                            className="bg-sky-600 h-full rounded-full transition-all duration-300 print:bg-sky-700"
+                            style={{ width: `${skill.proficiency}%` }}
+                          />
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </div>
