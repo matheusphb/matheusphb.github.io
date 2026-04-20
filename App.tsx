@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Github, Linkedin, MapPin, Phone, Settings, Download, X, Save, Plus, ExternalLink, Globe, Briefcase, Sparkles, GraduationCap } from "lucide-react";
+import { Mail, Github, Linkedin, MapPin, Phone, Settings, Download, X, Save, Plus, ExternalLink, Globe, Briefcase, Sparkles, GraduationCap, ShieldCheck } from "lucide-react";
 import { ResumeData } from "./types";
 import { INITIAL_DATA } from "./constants";
 
@@ -83,10 +83,40 @@ export default function App() {
   });
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [skillFilter, setSkillFilter] = useState("ALL");
+  const [isLoginOpen, setIsLoginOpen] = useState(true);
+  const [isBooting, setIsBooting] = useState(false);
+  const [bootStep, setBootStep] = useState(0);
+
+  const bootMessages = [
+    "> Iniciando sistema...",
+    "> Validando perfil profissional...",
+    `> Carregando currículo de ${data.name}...`,
+    "> Sincronizando dados locais...",
+    "> Acesso autorizado."
+  ];
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   }, [data]);
+
+  useEffect(() => {
+    if (!isBooting) return;
+
+    const interval = setInterval(() => {
+      setBootStep(prev => {
+        if (prev < bootMessages.length - 1) return prev + 1;
+        clearInterval(interval);
+        setTimeout(() => {
+          setIsLoginOpen(false);
+          setIsBooting(false);
+          setBootStep(0);
+        }, 500);
+        return prev;
+      });
+    }, 420);
+
+    return () => clearInterval(interval);
+  }, [isBooting, bootMessages.length]);
 
   const filteredSkills = useMemo(() => {
     if (skillFilter === "ALL") return data.skills;
@@ -141,8 +171,71 @@ export default function App() {
     }));
   };
 
+  const startAccess = () => {
+    if (isBooting) return;
+    setIsBooting(true);
+    setBootStep(0);
+  };
+
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-blue-100 pb-20 overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100 font-sans text-slate-900 selection:bg-blue-100 pb-20 overflow-x-hidden">
+      <AnimatePresence>
+        {isLoginOpen && (
+          <motion.div
+            key="login-gate"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[120] no-print bg-slate-950 text-white px-6"
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.25),transparent_30%),radial-gradient(circle_at_80%_70%,rgba(34,197,94,0.18),transparent_28%)]" />
+            <div className="relative max-w-xl mx-auto min-h-screen flex items-center">
+              <div className="w-full rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 shadow-2xl">
+                {!isBooting ? (
+                  <>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-300/30 text-cyan-200 text-xs font-bold uppercase tracking-widest mb-6">
+                      <ShieldCheck size={14} /> Acesso ao Portfólio
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-black tracking-tight leading-tight mb-3 uppercase">Painel Profissional</h2>
+                    <p className="text-slate-300 leading-relaxed mb-8">
+                      Versão interativa do currículo com projetos, experiência e dados técnicos atualizados.
+                    </p>
+                    <button
+                      onClick={startAccess}
+                      className="w-full rounded-2xl bg-cyan-400 text-slate-950 font-black uppercase tracking-[0.2em] py-4 hover:bg-cyan-300 transition-colors"
+                      type="button"
+                    >
+                      Entrar
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <h3 className="text-sm font-black uppercase tracking-[0.2em] text-cyan-200 mb-6">Inicializando</h3>
+                    <div className="font-mono text-sm space-y-3 mb-8">
+                      {bootMessages.slice(0, bootStep + 1).map((msg, index) => (
+                        <motion.p key={msg} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} className={index === bootStep ? "text-cyan-200" : "text-slate-400"}>
+                          {msg}
+                        </motion.p>
+                      ))}
+                    </div>
+                    <div className="h-1 rounded-full bg-white/10 overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: `${((bootStep + 1) / bootMessages.length) * 100}%` }}
+                        className="h-full bg-cyan-300"
+                      />
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="pointer-events-none absolute -top-24 -left-24 w-80 h-80 rounded-full bg-cyan-200/30 blur-3xl" />
+      <div className="pointer-events-none absolute top-[30%] -right-28 w-80 h-80 rounded-full bg-emerald-200/30 blur-3xl" />
+
       {/* Top Navigation Bar - Match Print 1 & 3 */}
       <nav className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-100 no-print">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
