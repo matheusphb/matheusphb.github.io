@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Github, Linkedin, MapPin, Settings, Download, X, Save, Plus, ExternalLink, Globe, Briefcase, Sparkles, GraduationCap } from "lucide-react";
+import { Mail, Github, Linkedin, MapPin, Phone, Settings, Download, X, Save, Plus, ExternalLink, Globe, Briefcase, Sparkles, GraduationCap } from "lucide-react";
 import { ResumeData } from "./types";
 import { INITIAL_DATA } from "./constants";
 
@@ -19,6 +19,21 @@ interface ExtendedResumeData extends ResumeData {
   availability: string;
 }
 
+const STORAGE_KEY = "resume_masterpiece_v5";
+
+const createId = () => `item-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+
+const normalizeUrl = (value?: string) => {
+  if (!value) return "#";
+  if (value.startsWith("http://") || value.startsWith("https://") || value.startsWith("mailto:") || value.startsWith("tel:")) {
+    return value;
+  }
+  if (value.includes("@") && !value.includes(" ")) {
+    return `mailto:${value}`;
+  }
+  return `https://${value.replace(/^\/+/, "")}`;
+};
+
 const EXTENDED_INITIAL: ExtendedResumeData = {
   ...INITIAL_DATA,
   availability: "Disponível para novos projetos",
@@ -28,14 +43,14 @@ const EXTENDED_INITIAL: ExtendedResumeData = {
   ],
   projects: [
     {
-      title: "Currículo Interativo",
-      description: "Um currículo profissional dinâmico com suporte a impressão em PDF e layout ultra-responsivo.",
-      tags: ["React", "TypeScript", "Vite", "Tailwind CSS"]
+      title: "Automação de Infraestrutura",
+      description: "Desenvolvimento e implementação de scripts em PowerShell para automatizar a instalação de bancos de dados em PDVs, reduzindo o tempo de configuração manual e padronizando ambientes.",
+      tags: ["PowerShell", "Automação", "Bancos de Dados"]
     },
     {
-      title: "Dashboard Analytics",
-      description: "Visualização de dados complexos com gráficos interativos e filtros em tempo real.",
-      tags: ["React", "D3.js", "Tailwind CSS"]
+      title: "Fábrica de Software",
+      description: "Planejamento de padronização de processos de desenvolvimento utilizando modelos CMMI e MPS.BR.",
+      tags: ["Processos", "CMMI", "MPS.BR"]
     }
   ]
 };
@@ -43,7 +58,7 @@ const EXTENDED_INITIAL: ExtendedResumeData = {
 export default function App() {
   const [data, setData] = useState<ExtendedResumeData>(() => {
     try {
-      const saved = localStorage.getItem("resume_masterpiece_v4");
+      const saved = localStorage.getItem(STORAGE_KEY);
       return saved ? JSON.parse(saved) : EXTENDED_INITIAL;
     } catch (e) {
       console.error("Error parsing resume data from localStorage:", e);
@@ -54,7 +69,7 @@ export default function App() {
   const [skillFilter, setSkillFilter] = useState("ALL");
 
   useEffect(() => {
-    localStorage.setItem("resume_masterpiece_v4", JSON.stringify(data));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   }, [data]);
 
   const filteredSkills = useMemo(() => {
@@ -64,14 +79,44 @@ export default function App() {
 
   const skillCategories = ["ALL", ...new Set(data.skills.map(s => s.category.toUpperCase()))];
 
+  const addExperience = () => {
+    setData(prev => ({
+      ...prev,
+      experience: [
+        ...prev.experience,
+        {
+          id: createId(),
+          role: "Novo cargo",
+          company: "Nova empresa",
+          period: "2026 - Atual",
+          description: "Descreva aqui as responsabilidades e conquistas.",
+          tags: ["Novo"]
+        }
+      ]
+    }));
+  };
+
+  const addProject = () => {
+    setData(prev => ({
+      ...prev,
+      projects: [
+        ...prev.projects,
+        {
+          title: "Novo projeto",
+          description: "Descreva aqui o projeto e o impacto gerado.",
+          tags: ["React", "TypeScript"]
+        }
+      ]
+    }));
+  };
+
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-blue-100 pb-20 overflow-x-hidden">
       {/* Top Navigation Bar - Match Print 1 & 3 */}
       <nav className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-100 no-print">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="font-black text-xl tracking-tighter">Matheus</span>
-            <span className="text-slate-400 italic font-medium">Costa de Araújo</span>
+            <span className="font-black text-xl tracking-tighter">{data.name}</span>
           </div>
           <div className="flex items-center gap-3">
             <button onClick={() => setIsEditOpen(true)} className="p-2 text-slate-400 hover:text-slate-900 transition-colors">
@@ -91,23 +136,28 @@ export default function App() {
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-50 border border-slate-200 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-500 mb-8">
               <Sparkles size={12} className="text-amber-400" /> {data.availability}
             </div>
-            <h1 className="text-6xl md:text-8xl font-black tracking-tight text-slate-900 mb-4 uppercase">
-              Desenvolvedor <br />
-              <span className="text-slate-400 italic font-medium block mt-[-0.1em]">Frontend & Especialista React</span>
+            <h1 className="text-6xl md:text-8xl font-black tracking-tight text-slate-900 mb-4 uppercase whitespace-pre-line">
+              {data.name}
             </h1>
-            <p className="text-xl md:text-2xl text-slate-500 font-medium leading-relaxed mt-10 max-w-2xl">
-              Desenvolvedor apaixonado por tecnologia e design, com foco em criar interfaces modernas, intuitivas e de alta performance.
+            <p className="text-2xl md:text-3xl text-slate-400 font-medium leading-tight max-w-4xl uppercase tracking-tight">
+              {data.title}
+            </p>
+            <p className="text-xl md:text-2xl text-slate-500 font-medium leading-relaxed mt-10 max-w-3xl">
+              {data.summary}
             </p>
             
             <div className="flex flex-wrap gap-8 mt-12 text-sm font-bold text-slate-400 uppercase tracking-widest border-t border-slate-100 pt-8">
-              <a href="#" className="flex items-center gap-2 hover:text-slate-900 transition-colors pointer-events-none">
-                 <Mail size={16} /> {data.email}
+              <a href={`mailto:${data.email}`} className="flex items-center gap-2 hover:text-slate-900 transition-colors">
+                <Mail size={16} /> {data.email}
               </a>
-              <a href="#" className="flex items-center gap-2 hover:text-slate-900 transition-colors pointer-events-none uppercase">
-                 <Linkedin size={16} /> LinkedIn
+              <a href={`tel:${data.phone.replace(/[^\d+]/g, "")}`} className="flex items-center gap-2 hover:text-slate-900 transition-colors">
+                 <Phone size={16} /> {data.phone}
               </a>
-              <a href="#" className="flex items-center gap-2 hover:text-slate-900 transition-colors pointer-events-none uppercase">
-                 <Github size={16} /> GitHub
+              <a href={normalizeUrl(data.linkedin)} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-slate-900 transition-colors uppercase">
+                <Linkedin size={16} /> LinkedIn
+              </a>
+              <a href={normalizeUrl(data.github)} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-slate-900 transition-colors uppercase">
+                <Github size={16} /> GitHub
               </a>
               <div className="flex items-center gap-2 uppercase">
                  <MapPin size={16} /> {data.location}
@@ -263,7 +313,7 @@ export default function App() {
                   <p className="text-xs text-slate-400 font-bold uppercase">As alterações são salvas localmente.</p>
                 </div>
                 <div className="flex gap-2">
-                   <button className="p-2 text-slate-300 hover:text-slate-900"><Plus size={20}/></button>
+                   <button onClick={addProject} className="p-2 text-slate-300 hover:text-slate-900" title="Adicionar projeto"><Plus size={20}/></button>
                    <button onClick={() => setIsEditOpen(false)} className="p-2 text-slate-300 hover:text-slate-900"><X size={20}/></button>
                 </div>
               </div>
@@ -290,7 +340,7 @@ export default function App() {
                 <div className="space-y-6">
                    <div className="flex justify-between items-center border-b pb-2">
                       <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-300">Experiência Profissional</h4>
-                      <button className="text-[10px] font-black uppercase text-slate-900 flex items-center gap-1 hover:underline">+ Adicionar</button>
+                     <button onClick={addExperience} className="text-[10px] font-black uppercase text-slate-900 flex items-center gap-1 hover:underline">+ Adicionar</button>
                    </div>
                    {data.experience.map(exp => (
                      <div key={exp.id} className="p-6 bg-slate-50 rounded-2xl border border-slate-100">
