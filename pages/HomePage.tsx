@@ -1,26 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CV_DATA } from '../constants';
 import { Experience, ProfileData } from '../types';
 import Pill from '../components/Pill';
 import html2pdf from 'html2pdf.js';
 import { BriefcaseIcon, AcademicCapIcon, SparklesIcon, UserIcon, EnvelopeIcon, PhoneIcon, MapPinIcon, PrinterIcon, DownloadIcon, GithubIcon } from '../components/Icons';
 import profileImage from '../perfil.png?url';
-import { isProfileData } from '../utils/validation';
 
-const STORAGE_KEY = 'cv_profile_data_v1';
-
-const loadProfileData = (): ProfileData => {
-  if (typeof window === 'undefined') return CV_DATA;
-  try {
-    const rawData = window.localStorage.getItem(STORAGE_KEY);
-    if (!rawData) return CV_DATA;
-    const parsedData = JSON.parse(rawData);
-    return isProfileData(parsedData) ? parsedData : CV_DATA;
-  } catch {
-    return CV_DATA;
-  }
-};
+interface HomePageProps {
+  profileData: ProfileData;
+  onUpdate: (data: ProfileData) => void;
+}
 
 const Section: React.FC<{ title: string; icon: React.ReactNode; children: React.ReactNode; className?: string }> = ({ title, icon, children, className = '' }) => (
   <section className={`mb-10 rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 shadow-sm print:mb-6 print:rounded-none print:border-slate-300 print:shadow-none ${className}`}>
@@ -43,16 +32,10 @@ const TimelineItem: React.FC<{ item: Experience; isLast: boolean }> = ({ item, i
   </li>
 );
 
-const HomePage: React.FC = () => {
-  const [profileData, setProfileData] = useState<ProfileData>(() => loadProfileData());
+const HomePage: React.FC<HomePageProps> = ({ profileData, onUpdate }) => {
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const { name, title, summary, contact, experience, education, certifications, technicalSkills, recentHighlights, projects } = profileData;
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(profileData));
-  }, [profileData]);
 
   const handlePrint = () => {
     window.print();

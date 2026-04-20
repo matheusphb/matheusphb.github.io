@@ -31,7 +31,7 @@ const App: React.FC = () => {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage profileData={profileData} onUpdate={setProfileData} />} />
         <Route path="/painel" element={<PanelPage profileData={profileData} onUpdate={setProfileData} />} />
       </Routes>
     </HashRouter>
