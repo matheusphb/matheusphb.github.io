@@ -1,54 +1,35 @@
-
 export interface Experience {
+  id: string;
   role: string;
   company: string;
   period: string;
   description: string;
+  tags: string[];
 }
 
 export interface Education {
+  id: string;
   degree: string;
   institution: string;
   period: string;
-  description?: string;
-}
-
-export interface CertificationGroup {
-  issuer: string;
-  certs: string[];
-}
-
-export interface Contact {
-    email: string;
-    phone: string;
-    location: string;
-    github?: string;
 }
 
 export interface Skill {
   name: string;
-  proficiency: number; // 0-100
-}
-
-export interface SkillGroup {
+  level: number; // 0-100
   category: string;
-  skills: Skill[];
 }
 
-export interface HighlightItem {
-  title: string;
-  description: string;
-}
-
-export interface ProfileData {
+export interface ResumeData {
   name: string;
   title: string;
   summary: string;
-  contact: Contact;
+  email: string;
+  phone: string;
+  location: string;
+  github?: string;
+  linkedin?: string;
   experience: Experience[];
   education: Education[];
-  certifications: CertificationGroup[];
-  technicalSkills: SkillGroup[];
-  recentHighlights: HighlightItem[];
-  projects: HighlightItem[];
+  skills: Skill[];
 }
