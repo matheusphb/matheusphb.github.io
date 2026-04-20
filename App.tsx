@@ -7,6 +7,7 @@ import { INITIAL_DATA } from "./constants";
 // --- Extensão de Tipos para o novo modelo ---
 // Nota: Adicionando campos que estão nos prints mas podem não estar no INITIAL_DATA
 interface Project {
+  id: string;
   title: string;
   description: string;
   tags: string[];
@@ -34,6 +35,19 @@ const normalizeUrl = (value?: string) => {
   return `https://${value.replace(/^\/+/, "")}`;
 };
 
+const normalizeLoadedData = (rawData: Partial<ExtendedResumeData>): ExtendedResumeData => ({
+  ...EXTENDED_INITIAL,
+  ...rawData,
+  experience: (rawData.experience ?? EXTENDED_INITIAL.experience).map((item, index) => ({
+    ...item,
+    id: item.id ?? `legacy-experience-${index}-${createId()}`,
+  })),
+  projects: (rawData.projects ?? EXTENDED_INITIAL.projects).map((item, index) => ({
+    ...item,
+    id: item.id ?? `legacy-project-${index}-${createId()}`,
+  })),
+});
+
 const EXTENDED_INITIAL: ExtendedResumeData = {
   ...INITIAL_DATA,
   availability: "Disponível para novos projetos",
@@ -43,11 +57,13 @@ const EXTENDED_INITIAL: ExtendedResumeData = {
   ],
   projects: [
     {
+      id: "p1",
       title: "Automação de Infraestrutura",
       description: "Desenvolvimento e implementação de scripts em PowerShell para automatizar a instalação de bancos de dados em PDVs, reduzindo o tempo de configuração manual e padronizando ambientes.",
       tags: ["PowerShell", "Automação", "Bancos de Dados"]
     },
     {
+      id: "p2",
       title: "Fábrica de Software",
       description: "Planejamento de padronização de processos de desenvolvimento utilizando modelos CMMI e MPS.BR.",
       tags: ["Processos", "CMMI", "MPS.BR"]
@@ -59,7 +75,7 @@ export default function App() {
   const [data, setData] = useState<ExtendedResumeData>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      return saved ? JSON.parse(saved) : EXTENDED_INITIAL;
+      return saved ? normalizeLoadedData(JSON.parse(saved)) : EXTENDED_INITIAL;
     } catch (e) {
       console.error("Error parsing resume data from localStorage:", e);
       return EXTENDED_INITIAL;
@@ -102,11 +118,26 @@ export default function App() {
       projects: [
         ...prev.projects,
         {
+          id: createId(),
           title: "Novo projeto",
           description: "Descreva aqui o projeto e o impacto gerado.",
           tags: ["React", "TypeScript"]
         }
       ]
+    }));
+  };
+
+  const removeExperience = (id: string) => {
+    setData(prev => ({
+      ...prev,
+      experience: prev.experience.filter(item => item.id !== id)
+    }));
+  };
+
+  const removeProject = (id: string) => {
+    setData(prev => ({
+      ...prev,
+      projects: prev.projects.filter(item => item.id !== id)
     }));
   };
 
@@ -277,7 +308,7 @@ export default function App() {
               </h2>
               <div className="space-y-6">
                 {data.projects.map(proj => (
-                  <div key={proj.title} className="group p-8 bg-slate-50/50 border border-slate-100 rounded-3xl hover:bg-white hover:shadow-2xl hover:shadow-slate-200 transition-all duration-500">
+                  <div key={proj.id} className="group p-8 bg-slate-50/50 border border-slate-100 rounded-3xl hover:bg-white hover:shadow-2xl hover:shadow-slate-200 transition-all duration-500">
                     <div className="flex justify-between items-start mb-6">
                       <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tighter">{proj.title}</h3>
                       <ExternalLink size={20} className="text-slate-300 group-hover:text-slate-900 transition-colors" />
@@ -344,8 +375,50 @@ export default function App() {
                    </div>
                    {data.experience.map(exp => (
                      <div key={exp.id} className="p-6 bg-slate-50 rounded-2xl border border-slate-100">
-                        <h5 className="font-black text-slate-900 uppercase text-sm mb-1">{exp.role}</h5>
+                        <div className="flex items-start justify-between gap-4 mb-1">
+                          <h5 className="font-black text-slate-900 uppercase text-sm">{exp.role}</h5>
+                          <button
+                            onClick={() => removeExperience(exp.id)}
+                            className="text-[10px] font-black uppercase tracking-widest text-red-500 hover:text-red-700"
+                            type="button"
+                          >
+                            Excluir
+                          </button>
+                        </div>
                         <p className="text-[10px] font-bold text-slate-400 uppercase mb-4">{exp.company} • {exp.period}</p>
+                        <p className="text-xs text-slate-500 leading-relaxed mb-4">{exp.description}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {exp.tags.map(tag => (
+                            <span key={tag} className="px-2 py-1 rounded-full bg-white border border-slate-200 text-[10px] font-black uppercase text-slate-400">{tag}</span>
+                          ))}
+                        </div>
+                     </div>
+                   ))}
+                </div>
+
+                <div className="space-y-6">
+                   <div className="flex justify-between items-center border-b pb-2">
+                      <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-300">Projetos</h4>
+                      <button onClick={addProject} className="text-[10px] font-black uppercase text-slate-900 flex items-center gap-1 hover:underline" type="button">+ Adicionar</button>
+                   </div>
+                   {data.projects.map(project => (
+                     <div key={project.id} className="p-6 bg-slate-50 rounded-2xl border border-slate-100">
+                        <div className="flex items-start justify-between gap-4 mb-1">
+                          <h5 className="font-black text-slate-900 uppercase text-sm">{project.title}</h5>
+                          <button
+                            onClick={() => removeProject(project.id)}
+                            className="text-[10px] font-black uppercase tracking-widest text-red-500 hover:text-red-700"
+                            type="button"
+                          >
+                            Excluir
+                          </button>
+                        </div>
+                        <p className="text-xs text-slate-500 leading-relaxed mb-4">{project.description}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {project.tags.map(tag => (
+                            <span key={tag} className="px-2 py-1 rounded-full bg-white border border-slate-200 text-[10px] font-black uppercase text-slate-400">{tag}</span>
+                          ))}
+                        </div>
                      </div>
                    ))}
                 </div>
