@@ -184,6 +184,15 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen p-4 sm:p-8 bg-slate-100 flex items-center justify-center print:bg-white print:p-0">
+      <button
+        onClick={() => setIsPanelOpen(true)}
+        className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 px-4 py-3 bg-sky-600 text-white rounded-full shadow-2xl border border-sky-500 hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300 transition-transform duration-200 hover:scale-105 print:hidden"
+        aria-label="Abrir painel de controle"
+      >
+        <CpuChipIcon className="w-5 h-5" />
+        <span className="text-sm font-semibold">Painel</span>
+      </button>
+
       <main className="container mx-auto max-w-6xl bg-white border border-slate-200 shadow-2xl rounded-2xl relative print:shadow-none print:rounded-none print:border-slate-300 print:w-full print:max-w-none">
         <div className="sticky top-4 z-20 flex justify-end gap-3 px-4 pt-4 sm:px-8 sm:pt-6 print:hidden">
           <button
