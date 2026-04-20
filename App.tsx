@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { CV_DATA } from './constants';
 import { Experience } from './types';
 import Pill from './components/Pill';
-import { BriefcaseIcon, AcademicCapIcon, SparklesIcon, UserIcon, EnvelopeIcon, PhoneIcon, MapPinIcon, PrinterIcon, GithubIcon, CpuChipIcon } from './components/Icons';
+import html2pdf from 'html2pdf.js';
+import { BriefcaseIcon, AcademicCapIcon, SparklesIcon, UserIcon, EnvelopeIcon, PhoneIcon, MapPinIcon, PrinterIcon, DownloadIcon, GithubIcon, CpuChipIcon } from './components/Icons';
 import profileImage from './perfil.png?url';
 
 const Section: React.FC<{ title: string; icon: React.ReactNode; children: React.ReactNode; className?: string }> = ({ title, icon, children, className = '' }) => (
@@ -28,24 +29,49 @@ const TimelineItem: React.FC<{ item: Experience; isLast: boolean }> = ({ item, i
 
 const App: React.FC = () => {
   const { name, title, summary, contact, experience, education, certifications, technicalSkills, recentHighlights, projects } = CV_DATA;
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const handlePrint = () => {
     window.print();
   };
 
+  const handleDownloadPdf = async () => {
+    if (!contentRef.current) return;
+
+    const element = contentRef.current;
+    const opt = {
+      margin: [8, 8, 8, 8],
+      filename: 'matheus-costa-de-araujo-curriculo.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: ['css', 'legacy'] },
+    } as const;
+
+    await html2pdf().set(opt).from(element).save();
+  };
+
   return (
     <div className="min-h-screen p-4 sm:p-8 bg-slate-100 flex items-center justify-center print:bg-white print:p-0">
       <main className="container mx-auto max-w-6xl bg-white shadow-2xl rounded-2xl relative print:shadow-none print:rounded-none print:w-full print:max-w-none">
-        
-        <button 
-          onClick={handlePrint} 
-          className="absolute top-6 right-6 p-3 bg-sky-600 text-white rounded-full shadow-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300 transition-transform duration-200 hover:scale-105 print:hidden"
-          aria-label="Imprimir Currículo"
-        >
-          <PrinterIcon className="w-6 h-6"/>
-        </button>
+        <div className="absolute top-6 right-6 flex gap-3 print:hidden">
+          <button
+            onClick={handleDownloadPdf}
+            className="p-3 bg-sky-600 text-white rounded-full shadow-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300 transition-transform duration-200 hover:scale-105"
+            aria-label="Baixar Currículo em PDF"
+          >
+            <DownloadIcon className="w-6 h-6" />
+          </button>
+          <button
+            onClick={handlePrint}
+            className="p-3 bg-slate-600 text-white rounded-full shadow-lg hover:bg-slate-700 focus:outline-none focus:ring-4 focus:ring-slate-300 transition-transform duration-200 hover:scale-105"
+            aria-label="Imprimir Currículo"
+          >
+            <PrinterIcon className="w-6 h-6"/>
+          </button>
+        </div>
 
-        <div className="p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-3 gap-12 print:grid-cols-3 print:gap-8 print:p-6">
+        <div ref={contentRef} className="p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-3 gap-12 print:grid-cols-3 print:gap-8 print:p-6">
           {/* Left Column (Sidebar) */}
           <aside className="lg:col-span-1 print:col-span-1">
             <div className="text-center lg:text-left">
