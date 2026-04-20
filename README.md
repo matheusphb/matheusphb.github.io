@@ -1,124 +1,263 @@
-# Currículo Interativo - Matheus Costa de Araújo
+# 📄 Currículo Interativo - Matheus Costa
 
 [![Deploy](https://github.com/matheusphb/matheusphb.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/matheusphb/matheusphb.github.io/actions/workflows/deploy.yml)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-matheusphb.github.io-brightgreen)](https://matheusphb.github.io)
 
-Um currículo interativo desenvolvido com React, TypeScript e Vite, com funcionalidades modernas e layout responsivo.
+Um currículo digital moderno, totalmente editável e responsivo. Desenvolvido com **React**, **TypeScript** e **Tailwind CSS**.
 
-##  Sobre o Projeto
+🔗 **Acesse em:** [https://matheusphb.github.io](https://matheusphb.github.io)
 
-Este projeto é uma versão digital e interativa do meu currículo pessoal, desenvolvido para demonstrar habilidades técnicas e oferecer uma apresentação mais dinâmica das minhas experiências profissionais e acadêmicas. O currículo conta com um design moderno, responsivo e funcionalidades avançadas de impressão.
+---
 
-##  Funcionalidades
+## ✨ Funcionalidades Principais
 
-- **Design Responsivo**: Adaptável para desktop, tablet e mobile
-- **Impressão Otimizada**: Layout específico para impressão em PDF
-- **Interface Moderna**: Design limpo e profissional
-- **Componentes Reutilizáveis**: Arquitetura bem estruturada
-- **TypeScript**: Tipagem estática para maior confiabilidade
+### 🎨 Painel de Edição em Tempo Real
+- ✏️ Edite seu nome, título profissional e resumo
+- 📋 Atualize todas as informações de contato
+- 🔧 Edite competências técnicas com suporte a categorias
+- 📝 Editor JSON para edição avançada do currículo completo
 
-##  Tecnologias Utilizadas
+### 💾 Persistência Automática
+- 💪 Todas as mudanças são salvas no navegador (`localStorage`)
+- 🔄 Seus dados não se perdem ao atualizar a página
+- 🔁 Botão para restaurar dados padrão a qualquer momento
 
-- **React** - Biblioteca para construção da interface
-- **TypeScript** - Superset do JavaScript com tipagem estática
-- **Vite** - Ferramenta de build rápida e moderna
-- **Tailwind CSS** - Framework CSS utilitário (via classes inline)
-- **Heroicons** - Ícones SVG otimizados
+### 📥 Download e Impressão
+- 📄 Baixe seu currículo em **PDF** formatado profissionalmente
+- 🖨️ Versão otimizada para impressão via `Ctrl+P`
+- 📐 Bordas e espaçamentos ajustados para papel A4
 
-##  Pré-requisitos
+### 📱 Design Responsivo
+- 📱 Visualização perfeita em smartphones, tablets e desktops
+- 🎯 Layout fluido que se adapta ao tamanho da tela
 
-- Node.js (versão 18 ou superior)
-- npm ou yarn
+---
 
-##  Instalação e Execução
+## 🚀 Como Começar
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/matheusphb/matheusphb.github.io.git
-   cd matheusphb.github.io
-   ```
+### 1. Clonar o Projeto
 
-2. Instale as dependências:
-   ```bash
-   npm install
-   ```
+```bash
+git clone https://github.com/matheusphb/matheusphb.github.io.git
+cd matheusphb.github.io
+```
 
-3. Execute o projeto em modo de desenvolvimento:
-   ```bash
-   npm run dev
-   ```
+### 2. Instalar Dependências
 
-4. Abra o navegador em [http://localhost:5173](http://localhost:5173)
+```bash
+npm install
+```
 
-##  Build para Produção
+### 3. Rodar em Desenvolvimento
 
-Para gerar os arquivos otimizados para produção:
+```bash
+npm run dev
+```
+
+Acesse: **http://localhost:5173**
+
+### 4. Build para Produção
 
 ```bash
 npm run build
 ```
 
-Para visualizar o build localmente:
+---
 
-```bash
-npm run preview
+## 📍 Páginas Disponíveis
+
+### 🏠 Página Principal (`/`)
+- Visualização do currículo formatado
+- Botão "Painel" para edição
+- Opções para baixar PDF e imprimir
+
+### ⚙️ Painel de Controle (`/#/painel`)
+- Edição completa de todas as seções
+- Interface dedicada e focada
+- Botão para voltar ao CV
+
+---
+
+## 🎨 Como Alterar o Visual
+
+### 🖌️ Estrutura e Layout (`src/App.tsx` e `src/pages/HomePage.tsx`)
+Nestes arquivos está toda a organização visual:
+- Onde fica o cabeçalho e estrutura das seções
+- Como a timeline de experiência é desenhada
+- Como o painel de edição funciona
+- Layout responsivo para diferentes tamanhos de tela
+
+**Para modificar:**
+- Altere classes Tailwind CSS (ex: `lg:col-span-2` para `lg:col-span-3`)
+- Reorganize os componentes `<Section>` para mudar a ordem das seções
+- Ajuste o grid com `grid-cols-1`, `grid-cols-2`, etc.
+
+---
+
+### 🎨 Estilos e Cores (`src/index.css`)
+É aqui que definimos:
+- Fontes principais (Inter)
+- Cores de fundo e destaques
+- Efeitos de transição e hover
+- **Regras de impressão** (garantem que o PDF saia perfeito)
+
+**Para alterar cores:**
+```css
+/* Procure por classes como: */
+bg-slate-900    /* Fundo escuro */
+bg-sky-600      /* Cor de destaque */
+border-slate-300 /* Cor de bordas */
+text-slate-700   /* Cor de texto */
+
+/* E troque para (exemplos): */
+bg-emerald-900   /* Verde escuro */
+bg-purple-600    /* Roxo */
+border-gray-300  /* Cinza */
+text-gray-700    /* Cinza escuro */
 ```
 
-##  Estrutura do Projeto
+---
+
+### 🏷️ Componentes Menores (`src/components/Pill.tsx`)
+Define o visual das "Pills" (etiquetas de tecnologias como React, TypeScript).
+
+**Para modificar:**
+- Altere classes Tailwind para cores diferentes
+- Mude o tamanho (padding, font-size)
+- Adicione efeitos de hover diferentes
+
+---
+
+### 📝 Dados do Conteúdo (`src/constants.ts`)
+Aqui você altera todo o texto:
+- Nome, título, resumo profissional
+- Experiência profissional
+- Educação e certificações
+- Competências técnicas
+- Destaques e projetos
+
+**Exemplo:**
+```typescript
+export const CV_DATA: ProfileData = {
+  name: "Seu Nome Aqui",
+  title: "Seu Título Profissional",
+  summary: "Seu resumo profissional aqui...",
+  // ... resto dos dados
+};
+```
+
+O design pega esses dados e os encaixa no layout automaticamente!
+
+---
+
+## 💡 Dicas Práticas de Customização
+
+### Trocar Cores Principais
+1. Abra `src/App.tsx`
+2. Procure por classes como `bg-blue-400` ou `text-sky-600`
+3. Substitua pelos valores que preferir
+   - `bg-slate-900` → `bg-emerald-900`
+   - `text-sky-600` → `text-purple-600`
+
+### Trocar Ícones
+1. Abra `src/components/Icons.tsx`
+2. Os ícones estão como componentes React
+3. Substitua pelos ícones que preferir (mesma biblioteca)
+
+### Adicionar Novas Seções
+1. Vá para `src/pages/HomePage.tsx`
+2. Copie um `<Section>` existente
+3. Altere o conteúdo e o ícone
+4. Adicione os dados em `src/constants.ts`
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+| Tecnologia | Função |
+|------------|--------|
+| **React 18** | Biblioteca UI |
+| **TypeScript** | Tipagem estática |
+| **Vite** | Build rápido |
+| **Tailwind CSS** | Estilização utilitária |
+| **React Router** | Roteamento entre páginas |
+| **html2pdf.js** | Exportação em PDF |
+
+---
+
+## 📁 Estrutura do Projeto
 
 ```
-├── components/          # Componentes reutilizáveis
-│   ├── Icons.tsx       # Ícones customizados
-│   └── Pill.tsx        # Componente de tag/pill
-├── public/             # Arquivos estáticos
-│   ├── perfil.jpg      # Foto de perfil
-│   └── perfil.png      # Foto de perfil alternativa
-├── App.tsx             # Componente principal
-├── assets.ts           # Recursos e imagens em base64
-├── constants.ts        # Dados do currículo
-├── types.ts            # Definições de tipos TypeScript
-├── index.tsx           # Ponto de entrada da aplicação
-└── vite.config.ts      # Configuração do Vite
+src/
+├── App.tsx                 # Router e gerenciador de estado global
+├── index.tsx              # Entry point da aplicação
+│
+├── pages/
+│   ├── HomePage.tsx       # Visualização e layout do CV
+│   └── PanelPage.tsx      # Painel de edição
+│
+├── components/
+│   ├── ControlPanel.tsx   # Formulário de edição
+│   ├── FloatingButton.tsx # Botão flutuante "Painel"
+│   ├── Pill.tsx           # Tag/etiqueta de skill
+│   └── Icons.tsx          # Ícones SVG customizados
+│
+├── utils/
+│   └── validation.ts      # Funções de validação de dados
+│
+├── constants.ts           # Dados iniciais do CV
+├── types.ts              # Interfaces TypeScript
+└── index.css             # Estilos globais e utilitários
 ```
 
-##  Personalização
+---
 
-Para personalizar o currículo com suas informações:
+## 🚀 Deploy Automático
 
-1. Edite o arquivo `constants.ts` com seus dados pessoais
-2. Substitua as imagens em `public/` pela sua foto de perfil
-3. Ajuste os estilos no arquivo `App.tsx` conforme necessário
+O projeto está configurado para **deploy automático no GitHub Pages**:
 
-##  Funcionalidades Especiais
+1. **Faça alterações localmente**
+2. **Commit e push para `main`:**
+   ```bash
+   git add -A
+   git commit -m "sua mensagem aqui"
+   git push
+   ```
+3. **Aguarde 1-2 minutos** - site atualiza automaticamente!
 
-- **Botão de Impressão**: Permite salvar o currículo em PDF diretamente do navegador
-- **Timeline Interativa**: Experiência profissional apresentada em formato timeline
-- **Seções Organizadas**: Divisão clara entre experiência, educação e habilidades
-- **Responsividade**: Layout que se adapta a diferentes tamanhos de tela
+---
 
-##  Deploy
+## 📚 Documentação Técnica
 
-O projeto está configurado para deploy automático no GitHub Pages através do domínio [matheusphb.github.io](https://matheusphb.github.io).
+Para detalhes técnicos sobre arquitetura de componentes, consulte [ARQUITETURA.md](./ARQUITETURA.md).
 
-##  Licença
+---
 
-Este projeto está sob a licença MIT. Sinta-se livre para usar como template para seu próprio currículo.
+## 🎯 Funcionalidades em Roadmap
 
-##  Contribuições
+- [ ] Edição avançada de experiência profissional no painel
+- [ ] Upload de foto do perfil
+- [ ] Temas personalizáveis (claro/escuro)
+- [ ] Exportar em múltiplos formatos (Word, Markdown)
+- [ ] Preview em tempo real do PDF
 
-Contribuições são sempre bem-vindas! Sinta-se à vontade para:
+---
 
-- Reportar bugs
-- Sugerir melhorias
-- Enviar pull requests
+## 📝 Licença
 
-##  Contato
+Este projeto está sob a licença MIT.
+
+---
+
+## 📞 Contato
 
 **Matheus Costa de Araújo**
 - Email: mateusphb20@gmail.com
 - GitHub: [@matheusphb](https://github.com/matheusphb)
-- LinkedIn: [Matheus Costa de Araújo](https://www.linkedin.com/in/matheus-costa-05093b254/)
+- LinkedIn: [Matheus Costa](https://www.linkedin.com/in/matheus-costa-05093b254/)
+
+---
+
+**Desenvolvido com ❤️ por Matheus Costa**
