@@ -1,22 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CV_DATA } from '../constants';
 import { ProfileData } from '../types';
 import { parseTechnicalSkills, isProfileData } from '../utils/validation';
-
-const STORAGE_KEY = 'cv_profile_data_v1';
-
-const loadProfileData = (): ProfileData => {
-  if (typeof window === 'undefined') return CV_DATA;
-  try {
-    const rawData = window.localStorage.getItem(STORAGE_KEY);
-    if (!rawData) return CV_DATA;
-    const parsedData = JSON.parse(rawData);
-    return isProfileData(parsedData) ? parsedData : CV_DATA;
-  } catch {
-    return CV_DATA;
-  }
-};
 
 interface PanelPageProps {
   profileData: ProfileData;
@@ -29,6 +15,15 @@ const PanelPage: React.FC<PanelPageProps> = ({ profileData, onUpdate }) => {
   );
   const [jsonDraft, setJsonDraft] = useState(JSON.stringify(profileData, null, 2));
   const [error, setError] = useState('');
+
+  // Sincroniza os drafts quando profileData muda (ex: vindo de outra página)
+  useEffect(() => {
+    setSkillsDraft(
+      profileData.technicalSkills.map(group => `${group.category}: ${group.skills.join(', ')}`).join('\n')
+    );
+    setJsonDraft(JSON.stringify(profileData, null, 2));
+    setError('');
+  }, [profileData]);
 
   const handleUpdateBasic = (field: keyof Omit<ProfileData, 'contact' | 'experience' | 'education' | 'certifications' | 'technicalSkills' | 'recentHighlights' | 'projects'>, value: string) => {
     onUpdate({ ...profileData, [field]: value });
