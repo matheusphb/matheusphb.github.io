@@ -4,6 +4,8 @@ import { CV_DATA } from '../constants';
 import { ProfileData } from '../types';
 import { parseTechnicalSkills, isProfileData } from '../utils/validation';
 
+const STORAGE_KEY = 'cv_profile_data_v1';
+
 interface PanelPageProps {
   profileData: ProfileData;
   onUpdate: (data: ProfileData) => void;
@@ -16,24 +18,25 @@ const PanelPage: React.FC<PanelPageProps> = ({ profileData, onUpdate }) => {
   const [jsonDraft, setJsonDraft] = useState(JSON.stringify(profileData, null, 2));
   const [error, setError] = useState('');
 
-  // Sincroniza os drafts quando profileData muda (ex: vindo de outra página)
+  // Sincroniza drafts apenas quando a chave mudar completamente
   useEffect(() => {
     setSkillsDraft(
       profileData.technicalSkills.map(group => `${group.category}: ${group.skills.join(', ')}`).join('\n')
     );
     setJsonDraft(JSON.stringify(profileData, null, 2));
-    setError('');
-  }, [profileData]);
+  }, [JSON.stringify(profileData)]);
 
-  const handleUpdateBasic = (field: keyof Omit<ProfileData, 'contact' | 'experience' | 'education' | 'certifications' | 'technicalSkills' | 'recentHighlights' | 'projects'>, value: string) => {
-    onUpdate({ ...profileData, [field]: value });
-  };
-
-  const handleUpdateContact = (field: keyof ProfileData['contact'], value: string) => {
-    onUpdate({
-      ...profileData,
-      contact: { ...profileData.contact, [field]: value },
-    });
+  const handleChange = (field: string, value: string) => {
+    const update = { ...profileData };
+    if (field.includes('.')) {
+      const [parent, child] = field.split('.');
+      if (parent === 'contact') {
+        update.contact = { ...update.contact, [child]: value };
+      }
+    } else {
+      (update as any)[field] = value;
+    }
+    onUpdate(update);
   };
 
   const handleApplySkills = () => {
@@ -97,7 +100,7 @@ const PanelPage: React.FC<PanelPageProps> = ({ profileData, onUpdate }) => {
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Nome</label>
                   <input
                     value={profileData.name}
-                    onChange={e => handleUpdateBasic('name', e.target.value)}
+                    onChange={e => handleChange('name', e.target.value)}
                     className="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
                   />
                 </div>
@@ -106,7 +109,7 @@ const PanelPage: React.FC<PanelPageProps> = ({ profileData, onUpdate }) => {
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Título Profissional</label>
                   <input
                     value={profileData.title}
-                    onChange={e => handleUpdateBasic('title', e.target.value)}
+                    onChange={e => handleChange('title', e.target.value)}
                     className="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
                   />
                 </div>
@@ -115,7 +118,7 @@ const PanelPage: React.FC<PanelPageProps> = ({ profileData, onUpdate }) => {
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Resumo Profissional</label>
                   <textarea
                     value={profileData.summary}
-                    onChange={e => handleUpdateBasic('summary', e.target.value)}
+                    onChange={e => handleChange('summary', e.target.value)}
                     rows={6}
                     className="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
                   />
@@ -132,7 +135,7 @@ const PanelPage: React.FC<PanelPageProps> = ({ profileData, onUpdate }) => {
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Email</label>
                   <input
                     value={profileData.contact.email}
-                    onChange={e => handleUpdateContact('email', e.target.value)}
+                    onChange={e => handleChange('contact.email', e.target.value)}
                     type="email"
                     className="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
                   />
@@ -141,7 +144,7 @@ const PanelPage: React.FC<PanelPageProps> = ({ profileData, onUpdate }) => {
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Telefone</label>
                   <input
                     value={profileData.contact.phone}
-                    onChange={e => handleUpdateContact('phone', e.target.value)}
+                    onChange={e => handleChange('contact.phone', e.target.value)}
                     className="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
                   />
                 </div>
@@ -149,7 +152,7 @@ const PanelPage: React.FC<PanelPageProps> = ({ profileData, onUpdate }) => {
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Localização</label>
                   <input
                     value={profileData.contact.location}
-                    onChange={e => handleUpdateContact('location', e.target.value)}
+                    onChange={e => handleChange('contact.location', e.target.value)}
                     className="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
                   />
                 </div>
@@ -157,7 +160,7 @@ const PanelPage: React.FC<PanelPageProps> = ({ profileData, onUpdate }) => {
                   <label className="block text-sm font-semibold text-slate-700 mb-2">GitHub</label>
                   <input
                     value={profileData.contact.github ?? ''}
-                    onChange={e => handleUpdateContact('github', e.target.value)}
+                    onChange={e => handleChange('contact.github', e.target.value)}
                     className="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
                   />
                 </div>
