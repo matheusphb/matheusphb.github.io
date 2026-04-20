@@ -42,8 +42,13 @@ const EXTENDED_INITIAL: ExtendedResumeData = {
 
 export default function App() {
   const [data, setData] = useState<ExtendedResumeData>(() => {
-    const saved = localStorage.getItem("resume_masterpiece_v4");
-    return saved ? JSON.parse(saved) : EXTENDED_INITIAL;
+    try {
+      const saved = localStorage.getItem("resume_masterpiece_v4");
+      return saved ? JSON.parse(saved) : EXTENDED_INITIAL;
+    } catch (e) {
+      console.error("Error parsing resume data from localStorage:", e);
+      return EXTENDED_INITIAL;
+    }
   });
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [skillFilter, setSkillFilter] = useState("ALL");
