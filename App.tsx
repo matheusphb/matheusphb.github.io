@@ -39,13 +39,23 @@ const App: React.FC = () => {
     if (!contentRef.current) return;
 
     const element = contentRef.current;
+    const width = element.scrollWidth;
+    const height = element.scrollHeight;
     const opt = {
-      margin: [8, 8, 8, 8],
+      margin: [10, 10, 10, 10],
       filename: 'matheus-costa-de-araujo-curriculo.pdf',
       image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+      html2canvas: {
+        scale: 1.5,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        windowWidth: width,
+        windowHeight: height,
+        scrollX: 0,
+        scrollY: 0,
+      },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak: { mode: ['css', 'legacy'] },
+      pagebreak: { mode: ['css', 'legacy', 'avoid-all'] },
     } as const;
 
     await html2pdf().set(opt).from(element).save();
@@ -73,7 +83,7 @@ const App: React.FC = () => {
           </button>
         </div>
 
-        <div ref={contentRef} className="p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-3 gap-12 print:grid-cols-3 print:gap-8 print:p-6">
+        <div ref={contentRef} className="p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-3 gap-12 print:grid-cols-3 print:gap-8 print:p-6 print:text-slate-900">
           {/* Left Column (Sidebar) */}
           <aside className="lg:col-span-1 print:col-span-1 lg:pr-8 lg:border-r lg:border-slate-200 print:border-slate-300">
             <div className="text-center lg:text-left">
