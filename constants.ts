@@ -89,5 +89,21 @@ export const INITIAL_DATA: ResumeData = {
     { name: "Active Directory", level: 86, category: "Sistemas Operacionais" },
     { name: "Power BI", level: 78, category: "Outras Ferramentas" },
     { name: "Hardware/software troubleshooting", level: 85, category: "Outras Ferramentas" }
+  ],
+  projects: [
+    {
+      name: "Automacao de Infraestrutura para PDVs",
+      description: "Automacao de instalacao de bancos em pontos de venda, reduzindo tempo de setup e padronizando ambientes.",
+      technologies: ["PowerShell", "Oracle", "SQL Server"]
+    },
+    {
+      name: "Padronizacao de Processos de Desenvolvimento",
+      description: "Estruturacao de boas praticas para qualidade de software com foco em maturidade de processos.",
+      technologies: ["CMMI", "MPS.BR", "Governanca"]
+    }
+  ],
+  languages: [
+    { name: "Portugues", level: "Nativo" },
+    { name: "Ingles", level: "Tecnico" }
   ]
 };

@@ -20,6 +20,18 @@ export interface Skill {
   category: string;
 }
 
+export interface Project {
+  name: string;
+  description: string;
+  technologies: string[];
+  link?: string;
+}
+
+export interface Language {
+  name: string;
+  level: string;
+}
+
 export interface ResumeData {
   name: string;
   title: string;
@@ -32,4 +44,6 @@ export interface ResumeData {
   experience: Experience[];
   education: Education[];
   skills: Skill[];
+  projects: Project[];
+  languages: Language[];
 }

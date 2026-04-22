@@ -10,6 +10,30 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+.bg-blob {
+  position: fixed;
+  filter: blur(120px);
+  opacity: 0.16;
+  z-index: -1;
+}
+
+.section-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.625rem;
+  font-weight: 800;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+@media print {
+  .card-print {
+    break-inside: avoid;
+  }
+}
+
 @media print {
   .no-print {
     display: none !important;
