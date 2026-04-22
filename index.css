@@ -32,6 +32,27 @@ body {
   display: none;
 }
 
+/* VLibras floating access button positioning for desktop and mobile. */
+div[vw] [vw-access-button] {
+  position: fixed !important;
+  right: 16px !important;
+  bottom: 88px !important;
+  z-index: 80 !important;
+}
+
+div[vw] [vw-plugin-wrapper] {
+  z-index: 80 !important;
+}
+
+@media (max-width: 640px) {
+  div[vw] [vw-access-button] {
+    right: 10px !important;
+    bottom: 84px !important;
+    transform: scale(0.92);
+    transform-origin: bottom right;
+  }
+}
+
 @page {
   size: A4;
   margin: 10mm;
@@ -54,6 +75,10 @@ body {
 
   .print-only {
     display: block !important;
+  }
+
+  div[vw] {
+    display: none !important;
   }
 
   .print-root {

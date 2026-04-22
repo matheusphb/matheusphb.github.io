@@ -22,6 +22,7 @@ import {
 import { useState, useEffect } from 'react';
 import { INITIAL_DATA } from './constants';
 import { Pill } from './components/Pill';
+import { VLibrasWidget } from './components/VLibrasWidget';
 import { ResumeData } from './types';
 
 export default function App() {
@@ -715,6 +716,8 @@ export default function App() {
           </div>
         </article>
       </section>
+
+      <VLibrasWidget />
     </div>
   );
 }
