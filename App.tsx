@@ -39,7 +39,8 @@ export default function App() {
         skills: parsed.skills || INITIAL_DATA.skills || [],
         education: parsed.education || INITIAL_DATA.education || [],
         projects: parsed.projects || INITIAL_DATA.projects || [],
-        languages: parsed.languages || INITIAL_DATA.languages || []
+        languages: parsed.languages || INITIAL_DATA.languages || [],
+        certifications: parsed.certifications || INITIAL_DATA.certifications || []
       };
     } catch (e) {
       return INITIAL_DATA;
@@ -96,9 +97,18 @@ export default function App() {
   const filteredSkills = activeTab === 'all'
     ? data.skills
     : data.skills.filter(s => s.category === activeTab);
+  const certifications = data.certifications || [];
+  const skillsByCategory = data.skills.reduce<Record<string, Array<{ name: string; level: number }>>>((acc, skill) => {
+    if (!acc[skill.category]) {
+      acc[skill.category] = [];
+    }
+    acc[skill.category].push({ name: skill.name, level: skill.level });
+    return acc;
+  }, {});
 
   return (
     <div className="min-h-screen bg-slate-50 selection:bg-slate-900 selection:text-white transition-all duration-500 overflow-x-hidden">
+      <div className="presentation-only">
       <AnimatePresence>
         {isLoading && (
           <motion.div
@@ -574,6 +584,137 @@ export default function App() {
           <Download className="w-6 h-6" />
         </button>
       </div>
+      </div>
+
+      <section className="print-only print-root text-slate-900">
+        <article className="print-page">
+          <div className="print-grid">
+            <aside className="print-left print-avoid-break">
+              <img
+                src="/perfil.jpg"
+                alt="Foto de perfil"
+                className="w-28 h-28 rounded-2xl object-cover border border-slate-200 mx-auto"
+                onError={event => {
+                  event.currentTarget.src = '/perfil.png';
+                }}
+              />
+              <h1 className="text-base font-black mt-4 leading-tight text-center">{data.name}</h1>
+              <p className="text-[10px] text-slate-600 font-semibold mt-1 text-center">{data.title}</p>
+
+              <div className="mt-5 space-y-2 text-[10px] text-slate-700 leading-4">
+                <h2 className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-500">Contatos</h2>
+                <p>{data.email}</p>
+                <p>{data.phone}</p>
+                <p>{data.location}</p>
+                {data.linkedin && <p>{data.linkedin}</p>}
+                {data.github && <p>{data.github}</p>}
+              </div>
+
+              <div className="mt-6 space-y-3 text-[10px]">
+                <h2 className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-500">Competencias Tecnicas</h2>
+                {Object.entries(skillsByCategory).map(([category, skills]) => (
+                  <div key={category}>
+                    <h3 className="font-bold text-slate-800 mb-1">{category}</h3>
+                    <div className="space-y-0.5 text-slate-700">
+                      {skills.map(skill => (
+                        <p key={skill.name} className="flex items-center justify-between gap-2">
+                          <span>{skill.name}</span>
+                          <span className="text-slate-500 whitespace-nowrap">{skill.level}%</span>
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </aside>
+
+            <div className="print-divider" />
+
+            <section className="print-right">
+              <section className="print-avoid-break">
+                <h2 className="print-title">Resumo Profissional</h2>
+                <p className="text-[11px] leading-5 text-slate-700 mt-2">{data.summary}</p>
+              </section>
+
+              <section className="mt-5">
+                <h2 className="print-title">Experiencia Profissional</h2>
+                <div className="mt-3 space-y-3">
+                  {data.experience.map(exp => (
+                    <article key={exp.id} className="print-avoid-break">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <h3 className="text-[12px] font-bold text-slate-900">{exp.role}</h3>
+                          <p className="text-[10px] font-semibold text-slate-600">{exp.company}</p>
+                        </div>
+                        <span className="print-date">{exp.period}</span>
+                      </div>
+                      <p className="text-[10px] leading-4 text-slate-700 mt-1">{exp.description}</p>
+                    </article>
+                  ))}
+                </div>
+              </section>
+
+              <section className="mt-5 print-avoid-break">
+                <h2 className="print-title">Projetos</h2>
+                <div className="mt-2 space-y-2">
+                  {data.projects.map((project, index) => (
+                    <article key={index} className="print-avoid-break">
+                      <h3 className="text-[12px] font-bold">{project.name}</h3>
+                      <p className="text-[10px] leading-4 text-slate-700 mt-1">{project.description}</p>
+                      <p className="text-[9px] text-slate-500 mt-1">Tecnologias: {project.technologies.join(', ')}</p>
+                    </article>
+                  ))}
+                </div>
+              </section>
+
+              <section className="mt-5 print-avoid-break">
+                <h2 className="print-title">Formacao Academica</h2>
+                <div className="mt-2 space-y-2">
+                  {data.education.map(edu => (
+                    <div key={edu.id} className="flex items-start justify-between gap-3 print-avoid-break">
+                      <div>
+                        <h3 className="text-[12px] font-bold">{edu.degree}</h3>
+                        <p className="text-[10px] text-slate-600">{edu.institution}</p>
+                      </div>
+                      <span className="print-date">{edu.period}</span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {certifications.length > 0 && (
+                <section className="mt-5 print-avoid-break">
+                  <h2 className="print-title">Certificacoes</h2>
+                  <div className="mt-2 space-y-2">
+                    {certifications.map((cert, index) => (
+                      <article key={index} className="print-avoid-break">
+                        <div className="flex items-start justify-between gap-3">
+                          <div>
+                            <h3 className="text-[12px] font-bold text-slate-900">{cert.name}</h3>
+                            <p className="text-[10px] text-slate-600">{cert.issuer}</p>
+                          </div>
+                          <span className="print-date">{cert.date}</span>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              <section className="mt-5 print-avoid-break">
+                <h2 className="print-title">Idiomas</h2>
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  {data.languages.map(language => (
+                    <span key={language.name} className="text-[10px] px-2 py-0.5 border border-slate-200 rounded-full">
+                      {language.name} - {language.level}
+                    </span>
+                  ))}
+                </div>
+              </section>
+            </section>
+          </div>
+        </article>
+      </section>
     </div>
   );
 }

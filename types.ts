@@ -32,6 +32,12 @@ export interface Language {
   level: string;
 }
 
+export interface Certification {
+  name: string;
+  issuer: string;
+  date: string;
+}
+
 export interface ResumeData {
   name: string;
   title: string;
@@ -46,4 +52,5 @@ export interface ResumeData {
   skills: Skill[];
   projects: Project[];
   languages: Language[];
+  certifications: Certification[];
 }

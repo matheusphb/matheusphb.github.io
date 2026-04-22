@@ -105,5 +105,52 @@ export const INITIAL_DATA: ResumeData = {
   languages: [
     { name: "Portugues", level: "Nativo" },
     { name: "Ingles", level: "Tecnico" }
+  ],
+  certifications: [
+    {
+      name: "Google Cloud Computing Foundations",
+      issuer: "Google Cloud",
+      date: "2025"
+    },
+    {
+      name: "Build Infrastructure with Terraform",
+      issuer: "Google Cloud",
+      date: "2025"
+    },
+    {
+      name: "Build a Secure Google Cloud Network",
+      issuer: "Google Cloud",
+      date: "2025"
+    },
+    {
+      name: "Oracle Cloud Infrastructure 2025 Foundations Associate",
+      issuer: "Oracle",
+      date: "2025"
+    },
+    {
+      name: "AWS Educate Introduction to Cloud 101",
+      issuer: "Amazon Web Services",
+      date: "2025"
+    },
+    {
+      name: "MongoDB Database Administrator Path",
+      issuer: "MongoDB",
+      date: "2025"
+    },
+    {
+      name: "MongoDB Data Modeling",
+      issuer: "MongoDB",
+      date: "2025"
+    },
+    {
+      name: "MongoDB Indexes",
+      issuer: "MongoDB",
+      date: "2025"
+    },
+    {
+      name: "TOTVS Varejo e Distribuicao - Linha WinThor - Distribuidor",
+      issuer: "TOTVS",
+      date: "2025"
+    }
   ]
 };
