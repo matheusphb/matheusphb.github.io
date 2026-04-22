@@ -25,8 +25,12 @@ import { Pill } from './components/Pill';
 import { VLibrasWidget } from './components/VLibrasWidget';
 import { ResumeData } from './types';
 
+const IS_EDIT_LOCKED = true;
+
 export default function App() {
   const [data, setData] = useState<ResumeData>(() => {
+    if (IS_EDIT_LOCKED) return INITIAL_DATA;
+
     const saved = localStorage.getItem('resume_data');
     if (!saved) return INITIAL_DATA;
 
@@ -80,7 +84,9 @@ export default function App() {
   useEffect(() => {
     const handleScroll = () => setHasScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
-    localStorage.setItem('resume_data', JSON.stringify(data));
+    if (!IS_EDIT_LOCKED) {
+      localStorage.setItem('resume_data', JSON.stringify(data));
+    }
     return () => window.removeEventListener('scroll', handleScroll);
   }, [data]);
 
@@ -177,13 +183,15 @@ export default function App() {
           </motion.h2>
 
           <div className="flex items-center gap-3">
-            <button
-              onClick={() => setIsEditPanelOpen(true)}
-              className="p-2 text-slate-400 hover:text-slate-900 transition-colors no-print"
-              title="Abrir Painel de Edicao"
-            >
-              <Settings className="w-5 h-5" />
-            </button>
+            {!IS_EDIT_LOCKED && (
+              <button
+                onClick={() => setIsEditPanelOpen(true)}
+                className="p-2 text-slate-400 hover:text-slate-900 transition-colors no-print"
+                title="Abrir Painel de Edicao"
+              >
+                <Settings className="w-5 h-5" />
+              </button>
+            )}
             <button
               onClick={handlePrint}
               className="group flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-800 transition-all active:scale-95 shadow-lg shadow-slate-200"
@@ -197,7 +205,7 @@ export default function App() {
 
       {/* Edit Panel Drawer */}
       <AnimatePresence>
-        {isEditPanelOpen && (
+        {!IS_EDIT_LOCKED && isEditPanelOpen && (
           <>
             <motion.div
               initial={{ opacity: 0 }}
@@ -572,12 +580,14 @@ export default function App() {
 
       {/* Floating Action Buttons (Mobile) */}
       <div className="fixed bottom-8 right-8 flex flex-col gap-4 no-print sm:hidden z-50">
-        <button
-          onClick={() => setIsEditPanelOpen(true)}
-          className="w-14 h-14 rounded-full bg-white text-slate-900 shadow-2xl border border-slate-100 flex items-center justify-center active:scale-95 transition-transform"
-        >
-          <Settings className="w-6 h-6" />
-        </button>
+        {!IS_EDIT_LOCKED && (
+          <button
+            onClick={() => setIsEditPanelOpen(true)}
+            className="w-14 h-14 rounded-full bg-white text-slate-900 shadow-2xl border border-slate-100 flex items-center justify-center active:scale-95 transition-transform"
+          >
+            <Settings className="w-6 h-6" />
+          </button>
+        )}
         <button
           onClick={handlePrint}
           className="w-14 h-14 rounded-full bg-slate-900 text-white shadow-2xl shadow-slate-900/40 flex items-center justify-center active:scale-95 transition-transform"
