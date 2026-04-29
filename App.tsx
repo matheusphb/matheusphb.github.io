@@ -23,6 +23,7 @@ import { useState, useEffect } from 'react';
 import { INITIAL_DATA } from './constants';
 import { Pill } from './components/Pill';
 import { VLibrasWidget } from './components/VLibrasWidget';
+import { ATSResume } from './components/ATSResume';
 import { ResumeData } from './types';
 
 const IS_EDIT_LOCKED = true;
@@ -56,6 +57,7 @@ export default function App() {
   const [isEditPanelOpen, setIsEditPanelOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [bootStep, setBootStep] = useState(0);
+  const [isATSMode, setIsATSMode] = useState(false);
 
   const categories = ['all', ...new Set(data.skills.map(s => s.category))];
 
@@ -114,6 +116,29 @@ export default function App() {
   }, {});
 
   return (
+    <>
+      {isATSMode ? (
+        <div className="bg-white min-h-screen">
+          <div className="sticky top-0 bg-white border-b border-gray-200 p-3 flex justify-between items-center z-50 flex-wrap gap-2">
+            <h3 className="font-bold text-gray-900 text-sm">Modo ATS-Friendly</h3>
+            <div className="flex gap-2 flex-wrap justify-end">
+              <button
+                onClick={() => window.print()}
+                className="px-3 py-1.5 bg-gray-900 text-white rounded text-xs font-medium hover:bg-gray-800 transition-colors whitespace-nowrap"
+              >
+                Imprimir PDF
+              </button>
+              <button
+                onClick={() => setIsATSMode(false)}
+                className="px-3 py-1.5 bg-gray-200 text-gray-900 rounded text-xs font-medium hover:bg-gray-300 transition-colors whitespace-nowrap"
+              >
+                Voltar
+              </button>
+            </div>
+          </div>
+          <ATSResume data={data} />
+        </div>
+      ) : (
     <div className="min-h-screen bg-slate-50 selection:bg-slate-900 selection:text-white transition-all duration-500 overflow-x-hidden">
       <div className="presentation-only">
       <AnimatePresence>
@@ -192,6 +217,14 @@ export default function App() {
                 <Settings className="w-5 h-5" />
               </button>
             )}
+            <button
+              onClick={() => setIsATSMode(true)}
+              className="group flex items-center gap-2 bg-slate-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-700 transition-all active:scale-95 shadow-lg shadow-slate-200"
+              title="Visualizar em modo ATS-friendly (compatível com sistemas de rastreamento)"
+            >
+              <Code2 className="w-4 h-4" />
+              <span className="hidden sm:inline">Modo ATS</span>
+            </button>
             <button
               onClick={handlePrint}
               className="group flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-800 transition-all active:scale-95 shadow-lg shadow-slate-200"
@@ -729,5 +762,7 @@ export default function App() {
 
       <VLibrasWidget />
     </div>
+      )}
+    </>
   );
 }
