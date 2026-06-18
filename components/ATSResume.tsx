@@ -61,7 +61,7 @@ export function ATSResume({ data }: ATSResumeProps) {
         {data.summary && (
           <div className="mb-3 ats-section">
             <h2 className="text-sm font-bold text-gray-900 mb-1 uppercase">Professional Summary</h2>
-            <p className="text-justify text-xs leading-tight">{data.summary}</p>
+            <p className="text-left text-xs leading-tight">{data.summary}</p>
           </div>
         )}
 
@@ -76,7 +76,7 @@ export function ATSResume({ data }: ATSResumeProps) {
                   <p className="text-xs text-gray-600">{exp.period}</p>
                 </div>
                 <p className="text-gray-700 font-semibold text-xs">{exp.company}</p>
-                <p className="text-justify text-xs leading-tight mt-0.5">{exp.description}</p>
+                <p className="text-left text-xs leading-tight mt-0.5">{exp.description}</p>
                 {exp.tags && exp.tags.length > 0 && (
                   <p className="text-xs text-gray-600 mt-0.5">Keywords: {exp.tags.join(', ')}</p>
                 )}
@@ -136,7 +136,7 @@ export function ATSResume({ data }: ATSResumeProps) {
             {data.projects.map((proj, idx) => (
               <div key={idx} className="mb-2 ats-section">
                 <p className="font-bold text-gray-900 text-xs">{proj.name}</p>
-                <p className="text-justify text-xs leading-tight">{proj.description}</p>
+                <p className="text-left text-xs leading-tight">{proj.description}</p>
                 {proj.technologies && proj.technologies.length > 0 && (
                   <p className="text-xs text-gray-600 mt-0.5">Technologies: {proj.technologies.join(', ')}</p>
                 )}

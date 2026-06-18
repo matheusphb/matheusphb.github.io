@@ -430,7 +430,7 @@ export default function App() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="max-w-2xl text-lg text-slate-500 leading-relaxed font-light"
+              className="max-w-xl text-lg text-slate-500 leading-7 font-light"
             >
               {data.summary}
             </motion.p>
