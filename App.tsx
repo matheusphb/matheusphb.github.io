@@ -395,10 +395,10 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      <main className="max-w-4xl mx-auto px-6 pt-32 pb-24 space-y-24">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-28 sm:pt-32 pb-24 space-y-24">
         {/* Intro */}
         <section id="hero" className="space-y-8">
-          <div className="space-y-4">
+          <div className="space-y-4 max-w-3xl mx-auto text-center sm:text-left">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -430,7 +430,7 @@ export default function App() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="max-w-xl text-lg text-slate-500 leading-7 font-light"
+              className="mx-auto sm:mx-0 max-w-2xl text-base sm:text-lg text-slate-500 leading-7 font-light"
             >
               {data.summary}
             </motion.p>
@@ -440,7 +440,7 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="flex flex-wrap gap-6 text-sm text-slate-500 pb-12 border-b border-slate-100"
+            className="flex flex-wrap justify-center sm:justify-start gap-6 text-sm text-slate-500 pb-12 border-b border-slate-100"
           >
             <a href={`mailto:${data.email}`} className="flex items-center gap-2 hover:text-slate-900 transition-colors">
               <Mail className="w-4 h-4" /> {data.email}
