@@ -2,8 +2,8 @@ import { ResumeData } from './types';
 
 export const INITIAL_DATA: ResumeData = {
   name: "Matheus Costa de Araújo",
-  title: "Analista de Suporte ERP | Especialista em Automação e Administração de Bancos de Dados",
-  summary: "Analista de Suporte ERP e graduando em Engenharia de Software, com foco em automação de processos, administração de bancos de dados e resolução de incidentes críticos. Atuação voltada à padronização de ambientes, análise de performance e sustentação de operações em sistemas corporativos de alta demanda.",
+  title: "Analista de TI | Cloud Computing, Dados e Infraestrutura | Google Cloud, SQL, Python, Oracle, WinThor/TOTVS e Automação",
+  summary: "Sou Analista de TI e estudante de Engenharia de Software, com experiência prática em suporte técnico, sistemas ERP de missão crítica, banco de dados, infraestrutura, monitoramento e automação de processos. Atuo no grupo Casa O Toureiro com sustentação e otimização do ecossistema TOTVS WinThor, realizando consultas SQL, análise de dados, apoio a rotinas críticas do ERP, administração de acessos, monitoramento de servidores e resolução de incidentes técnicos. Minha trajetória começou na operação logística e evoluiu para TI, o que me permite unir visão de negócio, processos e tecnologia para entregar soluções mais eficientes. Tenho forte interesse em Cloud Computing, Dados e Automação, com formação em Engenharia de Software e certificações e trilhas em Google Cloud, Oracle Cloud Infrastructure e AWS Educate. Venho desenvolvendo competências em GCP, IAM, Compute Engine, Cloud Storage, BigQuery, Dataflow, Terraform, Monitoring, Kubernetes, Python e SQL. Busco oportunidades em Cloud Support, Infraestrutura Cloud, Operações de TI, Sustentação de Sistemas, Engenharia de Dados Júnior ou Automação, onde eu possa aplicar minha experiência em ambientes corporativos, banco de dados, monitoramento e sistemas críticos para contribuir com soluções escaláveis, seguras e orientadas a dados.",
   email: "mateusphb20@gmail.com",
   phone: "+55 (86) 99449-1061",
   location: "Parnaíba, PI, Brasil",
