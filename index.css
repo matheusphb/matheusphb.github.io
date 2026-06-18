@@ -88,13 +88,13 @@ div[vw] [vw-plugin-wrapper] {
 
   .print-grid {
     display: grid;
-    grid-template-columns: 28% 1px minmax(0, 1fr);
-    column-gap: 4mm;
+    grid-template-columns: 24% 1px minmax(0, 1fr);
+    column-gap: 2mm;
     align-items: start;
   }
 
   .print-left {
-    padding-right: 2mm;
+    padding-right: 1mm;
     overflow-wrap: anywhere;
   }
 
@@ -105,7 +105,7 @@ div[vw] [vw-plugin-wrapper] {
   }
 
   .print-right {
-    padding-left: 1mm;
+    padding-left: 0;
     min-width: 0;
   }
 
